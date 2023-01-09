@@ -1,0 +1,15 @@
+[2022-12-23 09:24:42.132] [renderer1] [error] Cannot read property '$onDebugServiceInitialized' of undefined: TypeError: Cannot read property '$onDebugServiceInitialized' of undefined
+    at ViperService.initDebugService (file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:302922:22)
+    at file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:302352:26
+    at InstantiationService.invokeFunction (file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:88761:27)
+    at file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:302351:43
+[2022-12-23 09:24:42.327] [renderer1] [error] connect ECONNREFUSED 127.0.0.1:54284: Error: connect ECONNREFUSED 127.0.0.1:54284
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1054:14)
+[2022-12-23 09:24:44.972] [renderer1] [error] Unexpected end of JSON input: SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at ColorThemeData.injectViperColors (file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:243774:28)
+    at file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:316507:31
+    at async Promise.all (index 0)
+[2022-12-23 09:24:48.571] [renderer1] [error] Cannot read property '$tasksUpdated' of undefined: TypeError: Cannot read property '$tasksUpdated' of undefined
+    at file:///C:/Users/PC/eclipse/plugins/com.genuitec.eclipse.code.engine.app.win32.x86_64_3.6.0.202002212104/engine/resources/app/out/vs/workbench/workbench.desktop.main.js:302981:26
+    at processTicksAndRejections (internal/process/task_queues.js:89:5)

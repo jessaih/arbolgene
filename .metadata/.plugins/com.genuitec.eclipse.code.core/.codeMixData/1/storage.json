@@ -1,0 +1,14 @@
+{
+    "telemetry.machineId": "4dcaf70365a7ed73f600b604116f84a031efea927504d1fe29959368f47ce2de",
+    "openedPathsList": {
+        "workspaces3": [
+            {
+                "id": "6a52681ffe5e7a5d17190f86b41bf34d",
+                "configURIPath": "file:///c%3A/xampp/htdocs/arbolgene/.metadata/codemix.code-workspace"
+            }
+        ],
+        "files2": []
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e"
+}

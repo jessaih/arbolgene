@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>Administración</title>
+
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="assets/css/all.min.css">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="assets/css/owl.carousel.css">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<!-- animate css -->
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="assets/css/meanmenu.min.css">
+	<!-- main style -->
+	<link rel="stylesheet" href="assets/css/main.css">
+	<!-- responsive -->
+	<link rel="stylesheet" href="assets/css/responsive.css">
+	<style>
+		.cart-table a:hover{
+			color: #F28123;
+		}
+	</style>
+</head>
+<body ng-app="App" ng-controller="MyCtrl">
+	
+	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+	
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="index.php">
+								<img src="assets/img/logo.png" alt="">
+							</a>
+						</div>
+						<!-- logo -->
+
+						<!-- menu start -->
+						<nav class="main-menu" style="text-align:left;">
+							<ul>
+								<li><a href="visualiza-ancestros.html">Ver Árbol</a></li>
+								<li><a href="administra-arbol.html">Administrar Árbol</a></li>
+								<li>&nbsp;</li>
+							</ul>
+						</nav>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+
+	<!-- search area -->
+	
+	<!-- end search arewa -->
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Administrar Árbol</p>
+						<h1>Genealógico</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+	<div class="single-product mt-150 mb-150" >
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img id="ancestro_img_principal" src="assets/img/album/no_img.png" alt='' />
+						<p id="ancestro_nota_principal" style="font-weight: bold ;text-align: center;"> </p>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div id="ancestro_nombres" class="single-product-content">
+
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<!-- end single product -->
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div id="ancestro_galeria" class="row product-lists">
+				<div class="col-lg-4 col-md-6 text-center strawberry">
+					<div  class="single-product-item">
+						<div class="product-image">
+							<img src="assets/img/album/no_img.png" alt=""/>
+						</div>
+						<h3>No hay mas imágenes que mostrar</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end products -->
+	<br/><br/><br/>
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="section-title">	
+					<h3 style="text-align:center"><span class="orange-text">Sus</span> Descendientes</h3>
+				</div>
+				<table class="cart-table">
+					<thead class="cart-table-head">
+						<tr class="table-head-row" style="font-weight:bold;">
+							<th class="product-number">#</th>
+							<th class="product-image">Imagen</th>
+							<th class="product-name">Nombre</th>
+							<th class="product-lastname">Apellido</th>
+							<th class="product-number"># de hijo/a</th>
+							<th class="product-notas">Notas</th>
+							<th class="product-operations" colspan="3">Operaciones</th>
+						</tr>
+					</thead>
+					<tbody id="descendientes" >
+						<tr class="table-body-row" style="text-align: center; " ng-repeat="descendiente in descendientes track by $index"> 
+							<td class="product-number"> {{$index +1}}</td>  
+							<td class="product-image" style="vertical-align: middle;">
+								<img ng-if="!descendiente.ruta_img" ng-src="assets/img/album/no_img.png" alt=""></a>								
+								<img ng-if="descendiente.ruta_img" ng-src="assets/img/album/{{descendiente.ruta_img}}" alt="">
+							</td> 
+							<td class="product-name"><b> {{descendiente.nombres}} </b></td> 
+							<td class="product-lastname"><b> {{descendiente.apellidos}} </b></td> 
+							<td class="product-number"> {{descendiente.numero_hermano}} </td> 
+							<td class="product-notas"> {{descendiente.notas}} </td> 
+							<td class="product-edit1"><a ng-click="modify(descendiente.descendiente_id)" ><i class='fas fa-pen' title="Editar"></i></a></td> 
+							<td class="product-remove"><a ng-click="delete(descendiente.descendiente_id)"><i class='fas fa-trash' title="Eliminar"></i></a></td> 
+							<td class="product-view">
+								<a ng-if="descendiente.numero_parejas > 0" ng-click="view(descendiente.descendiente_id)"><i class='fas fa-eye' title="Ver descendientes"></i></a>
+							</td>
+							
+						</tr>
+					</tbody>
+					<tfoot>
+						
+						<tr id="addDescendiente" style="display: none;">
+							<form name="addDescendienteForm" id="addDescendienteForm">
+								<td colspan = "2">
+								<!-- <form action="controller/ArbolGenealogicoController.php" method="POST" enctype="multipart/form-data">-->
+									<input id="newDescendienteImg" type = "file" name="file" />
+									<!--<input type="text" name="nombre"/>
+									<input type="submit" />
+								</form> -->
+								</td>
+								<td><input id="newDescendienteNombre" type="text" ></td>
+								<td><input id="newDescendienteApellido" type="text" ></td>
+								<td><input id="newDescendienteNumero" type="number" ></td>
+								<td><input id="newDescendienteNotas" type="text" ></td>
+								<td colspan="3" style="text-align:center;">
+									<a ng-click="add()" ><i class='fas fa-check' title="Confirmar"></i></a>
+								</td>
+							</form>
+						</tr>
+						
+						<tr style="text-align: center; border: solid; border-top-width: 2px; border-color: #efefef;">
+							<td class="add-item" colspan="8" style="font-weight: bold; ">
+								<a ng-click="showAddSection()" >
+									<i class='fas fa-plus' title="Agregar"></i>
+								</a>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+
+	<!-- logo carousel -->
+
+	<!-- end logo carousel -->
+
+	<!-- footer -->
+	<div class="footer-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box about-widget">
+						<h2 class="widget-title">Acerca</h2>
+						<p>
+						Grupo de todos los herederos de los 6 hermanos González González nacidos en Tzurumuato hoy Pastor Ortiz, Michoacán.
+						Nuestros ancestros son:
+						<br/><br/>
+						Teodomira, Eulalia, Josefa, Antonio, Francisca y Maria nacidos entre 1875 y 1890, todos hijos de Francisco González y Francisca González</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box get-in-touch">
+						<h2 class="widget-title">Contactáme</h2>
+						<ul>
+							<li></li>
+							<li>Email: jessaigh@gmail.com</li>
+							<li>Whatsapp</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end footer -->
+	
+	<!-- copyright -->
+		<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end copyright -->
+	
+	<!-- jquery -->
+	<script src="assets/js/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap -->
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="assets/js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="assets/js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="assets/js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="assets/js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="assets/js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="assets/js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="assets/js/sticker.js"></script>
+	<!-- main js -->
+	<script src="assets/js/main.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+	<script src="assets/js/arbol-admin.js"></script>
+
+	<script>
+	var app = angular.module('App', []);
+
+	app.controller('MyCtrl', ['$scope','$http', '$compile', function($scope,$http, $compile) {
+			const params = new URL(location.href).searchParams;
+			const pareja_id = params.get('pareja_id');
+		angular.element(document).ready(function () {
+
+			$http({
+				method: 'GET', 
+				url: 'controller/ArbolGenealogicoController.php',
+				params: {
+					pareja_id : pareja_id,
+					full_content: true
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}).then(function (response) {
+				console.log(response.data);
+				$scope.descendientes = response.data.descendientes;
+				$scope.pareja = response.data.pareja;
+				$scope.pareja_info = response.data.pareja_info;
+				
+				if($scope.pareja_info.length !== null && $scope.pareja_info.length > 0){
+					$("#ancestro_img_principal").attr("src", "assets/img/album/" + $scope.pareja_info[0].ruta_img);
+					$("#ancestro_nota_principal").text($scope.pareja_info[0].notas);
+					if($scope.pareja_info.length > 1){
+						var index = 0;
+						$("#ancestro_galeria").html("");
+						while(index < $scope.pareja_info.length){
+							$("#ancestro_galeria").append(
+								"<div class='col-lg-4 col-md-6 text-center strawberry'>" + 
+									"<div class='single-product-item'>" + 
+										"<div class='product-image'>" +
+											"<img src='assets/img/album/" + $scope.pareja_info[index].ruta_img + "' alt=''>" +
+										"</div>" + 
+										"<h3>"+ $scope.pareja_info[index].notas +"</h3>" +
+									"</div>" + 
+								"</div>"
+							);
+							index++;
+						}
+						$("#ancestro_galeria").append("<br/><br/>");
+					}
+				}
+				
+				if($scope.pareja != null){
+					$("#ancestro_nombres").html("<h3 style='text-align: center;'>" + $scope.pareja[0].nom_eo + " " + $scope.pareja[0].ape_eo + "<br/> y <br/>" + $scope.pareja[0].nom_ea + " " + $scope.pareja[0].ape_ea +"</h3>"
+						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_eo + ":</b> " + ($scope.pareja[0].notas_eo == null ? "-" : $scope.pareja[0].notas_eo) + "</p"
+						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_ea + ":</b> " + ($scope.pareja[0].notas_ea == null ? "-" : $scope.pareja[0].notas_ea) + "</p"
+					);
+				}
+
+			});	
+		});
+		
+		$scope.modify = function(descendiente_id){
+			alert("modifica " + descendiente_id);
+			/*$http.get('<c:url value='/learningresources/ajaxvalue'/>').
+				success(function(data) {
+					$scope.response = data;
+			});*/
+		}
+		
+		$scope.delete = function(descendiente_id){
+			alert("elimina " + descendiente_id);
+			/*$http.get('<c:url value='/learningresources/ajaxvalue'/>').
+				success(function(data) {
+					$scope.response = data;
+			});*/
+		}		
+
+		$scope.showAddSection = function(){
+			$("#addDescendiente").show();
+		}	
+		
+		$scope.add = function(files){
+			var fd = new FormData();
+			
+			var files = document.getElementById('newDescendienteImg').files[0];
+			let nombre = document.getElementById('newDescendienteNombre').value;
+			let apellido = document.getElementById('newDescendienteApellido').value;
+			let numero = document.getElementById('newDescendienteNumero').value;
+			let notas = document.getElementById('newDescendienteNotas').value;
+			
+			fd.append('file',files);
+			fd.append('nombres', nombre);
+			fd.append('apellidos', apellido);
+			fd.append('numero', numero);
+			fd.append('notas', notas);
+			fd.append('pareja_id', pareja_id);
+			
+			$http({
+			   method: 'POST',
+			   url: 'controller/ArbolGenealogicoController.php',
+			   data: fd,
+			   headers: {'Content-Type': undefined}
+			}).then(function(response){
+				
+				$http({
+					method: 'GET', 
+					url: 'controller/ArbolGenealogicoController.php',
+					params: {
+						pareja_id : pareja_id,
+						full_content: false
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
+				}).then(
+					function(response){
+						$scope.descendientes = response.data.descendientes;
+						document.getElementById("addDescendienteForm").reset();
+					}, function(response){
+						console.log('error ' + (response));
+					}
+				);
+
+            }, function(response){
+                 console.log('error ' + (response));
+            });
+			
+		}	
+	}]);
+
+	
+
+	</script>
+
+
+
+</body>
+</html>
