@@ -34,6 +34,16 @@
 		.cart-table a:hover{
 			color: #F28123;
 		}
+		
+		.formlabel {
+			font-weight: bold;
+			text-align: right;
+		} 
+		
+		.required{
+			color: red;
+		}
+		
 	</style>
 </head>
 <body ng-app="App" ng-controller="MyCtrl">
@@ -107,7 +117,7 @@
 				</div>
 				<div class="col-md-7">
 					<div id="ancestro_nombres" class="single-product-content">
-
+						aaaaa
 					</div>
 				</div>
 			</div>			
@@ -142,7 +152,7 @@
 				<table class="cart-table">
 					<thead class="cart-table-head">
 						<tr class="table-head-row" style="font-weight:bold;">
-							<th class="product-number">#</th>
+							<th class="product-index">#</th>
 							<th class="product-image">Imagen</th>
 							<th class="product-name">Nombre</th>
 							<th class="product-lastname">Apellido</th>
@@ -153,7 +163,7 @@
 					</thead>
 					<tbody id="descendientes" >
 						<tr class="table-body-row" style="text-align: center; " ng-repeat="descendiente in descendientes track by $index"> 
-							<td class="product-number"> {{$index +1}}</td>  
+							<td class="product-index"> {{$index +1}}</td>  
 							<td class="product-image" style="vertical-align: middle;">
 								<img ng-if="!descendiente.ruta_img" ng-src="assets/img/album/no_img.png" alt=""></a>								
 								<img ng-if="descendiente.ruta_img" ng-src="assets/img/album/{{descendiente.ruta_img}}" alt="">
@@ -163,38 +173,17 @@
 							<td class="product-number"> {{descendiente.numero_hermano}} </td> 
 							<td class="product-notas"> {{descendiente.notas}} </td> 
 							<td class="product-edit1"><a ng-click="modify(descendiente.descendiente_id)" ><i class='fas fa-pen' title="Editar"></i></a></td> 
-							<td class="product-remove"><a ng-click="delete(descendiente.descendiente_id)"><i class='fas fa-trash' title="Eliminar"></i></a></td> 
+							<td class="product-remove"><a ng-click="delete(descendiente.descendiente_id, descendiente.nombres, descendiente.apellidos)"><i class='fas fa-trash' title="Eliminar"></i></a></td> 
 							<td class="product-view">
 								<a ng-if="descendiente.numero_parejas > 0" ng-click="view(descendiente.descendiente_id)"><i class='fas fa-eye' title="Ver descendientes"></i></a>
 							</td>
-							
 						</tr>
 					</tbody>
-					<tfoot>
-						
-						<tr id="addDescendiente" style="display: none;">
-							<form name="addDescendienteForm" id="addDescendienteForm">
-								<td colspan = "2">
-								<!-- <form action="controller/ArbolGenealogicoController.php" method="POST" enctype="multipart/form-data">-->
-									<input id="newDescendienteImg" type = "file" name="file" />
-									<!--<input type="text" name="nombre"/>
-									<input type="submit" />
-								</form> -->
-								</td>
-								<td><input id="newDescendienteNombre" type="text" ></td>
-								<td><input id="newDescendienteApellido" type="text" ></td>
-								<td><input id="newDescendienteNumero" type="number" ></td>
-								<td><input id="newDescendienteNotas" type="text" ></td>
-								<td colspan="3" style="text-align:center;">
-									<a ng-click="add()" ><i class='fas fa-check' title="Confirmar"></i></a>
-								</td>
-							</form>
-						</tr>
-						
+					<tfoot>					
 						<tr style="text-align: center; border: solid; border-top-width: 2px; border-color: #efefef;">
 							<td class="add-item" colspan="8" style="font-weight: bold; ">
-								<a ng-click="showAddSection()" >
-									<i class='fas fa-plus' title="Agregar"></i>
+								<a ng-click="addNewDescendiente()" data-toggle="modal" data-target="#myModal" >
+									<i class='fas fa-plus' title="Agregar Nuevo Descendiente"></i>
 								</a>
 							</td>
 						</tr>
@@ -204,7 +193,63 @@
 		</div>
 	</div>
 	<!-- end cart -->
+	<!-- <i class='fas fa-check' title="Confirmar">
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="showAddSection()">Open Modal</button> -->
 
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog" style="display: none;">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" >
+					<h4 class="modal-title" id = "modal-title"></h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form name="addDescendienteForm" id="addDescendienteForm" novalidate>
+						<table cellpadding="12" id="tblForm">
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+								<td><input id="newDescendienteImg" type = "file" name="file" /></td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</div></td>
+								<td> 
+									<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required ng-focus="addDescendienteForm.newDescendienteNumero.$setDirty()" /> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+								</td>
+							</tr>								
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</div></td>
+								<td> 
+									<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+								</td>
+							</tr>								
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNumero"># de Hijo/a</label><span class="required"> *</div></td>
+								<td> 
+									<input id="newDescendienteNumero" name="newDescendienteNumero" ng-model="newDescendienteNumero" type="number" required/> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteNumero.$dirty && addDescendienteForm.newDescendienteNumero.$error.required">* Campo Requerido </label>
+								</td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+								<td> <input id="newDescendienteNotas" type="text" /> </td>
+							</tr>								
+							<tr>
+								<td > </td>
+								<td class = "formlabel"> <button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid">Crear</button> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> </td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="modal-dismiss" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- logo carousel -->
 
 	<!-- end logo carousel -->
@@ -279,8 +324,10 @@
 	var app = angular.module('App', []);
 
 	app.controller('MyCtrl', ['$scope','$http', '$compile', function($scope,$http, $compile) {
-			const params = new URL(location.href).searchParams;
-			const pareja_id = params.get('pareja_id');
+
+		const params = new URL(location.href).searchParams;
+		const pareja_id = params.get('pareja_id');
+		
 		angular.element(document).ready(function () {
 
 			$http({
@@ -294,19 +341,20 @@
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			}).then(function (response) {
-				console.log(response.data);
 				$scope.descendientes = response.data.descendientes;
 				$scope.pareja = response.data.pareja;
 				$scope.pareja_info = response.data.pareja_info;
 				
 				if($scope.pareja_info.length !== null && $scope.pareja_info.length > 0){
-					$("#ancestro_img_principal").attr("src", "assets/img/album/" + $scope.pareja_info[0].ruta_img);
-					$("#ancestro_nota_principal").text($scope.pareja_info[0].notas);
+					document.getElementById("ancestro_img_principal").setAttribute("src", "assets/img/album/" + $scope.pareja_info[0].ruta_img);
+					
+					document.getElementById("ancestro_nota_principal").innerText = $scope.pareja_info[0].notas;
 					if($scope.pareja_info.length > 1){
-						var index = 0;
-						$("#ancestro_galeria").html("");
+						//Estableciendo el indice en 1 para que continue con la secuencia de imagenes
+						var index = 1;
+						document.getElementById("ancestro_galeria").innerHTML = "";
 						while(index < $scope.pareja_info.length){
-							$("#ancestro_galeria").append(
+							document.getElementById("ancestro_galeria").innerHTML += 
 								"<div class='col-lg-4 col-md-6 text-center strawberry'>" + 
 									"<div class='single-product-item'>" + 
 										"<div class='product-image'>" +
@@ -315,18 +363,17 @@
 										"<h3>"+ $scope.pareja_info[index].notas +"</h3>" +
 									"</div>" + 
 								"</div>"
-							);
+							;
 							index++;
 						}
-						$("#ancestro_galeria").append("<br/><br/>");
+						document.getElementById("ancestro_galeria").innerHTML += "<br/><br/>";
 					}
 				}
 				
 				if($scope.pareja != null){
-					$("#ancestro_nombres").html("<h3 style='text-align: center;'>" + $scope.pareja[0].nom_eo + " " + $scope.pareja[0].ape_eo + "<br/> y <br/>" + $scope.pareja[0].nom_ea + " " + $scope.pareja[0].ape_ea +"</h3>"
-						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_eo + ":</b> " + ($scope.pareja[0].notas_eo == null ? "-" : $scope.pareja[0].notas_eo) + "</p"
-						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_ea + ":</b> " + ($scope.pareja[0].notas_ea == null ? "-" : $scope.pareja[0].notas_ea) + "</p"
-					);
+					document.getElementById("ancestro_nombres").innerHTML = "<h3 style='text-align: center;'>" + $scope.pareja[0].nom_eo + " " + $scope.pareja[0].ape_eo + "<br/> y <br/>" + $scope.pareja[0].nom_ea + " " + $scope.pareja[0].ape_ea +"</h3>"
+						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_eo + ":</b> " + ($scope.pareja[0].notas_eo == null ? "-" : $scope.pareja[0].notas_eo) + "</p>"
+						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_ea + ":</b> " + ($scope.pareja[0].notas_ea == null ? "-" : $scope.pareja[0].notas_ea) + "</p>";
 				}
 
 			});	
@@ -334,22 +381,81 @@
 		
 		$scope.modify = function(descendiente_id){
 			alert("modifica " + descendiente_id);
-			/*$http.get('<c:url value='/learningresources/ajaxvalue'/>').
-				success(function(data) {
-					$scope.response = data;
-			});*/
+			
+			$http({
+				method: 'PUT', 
+				url: 'controller/ArbolGenealogicoController.php',
+				params: {
+					descendiente_id : descendiente_id
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}).then(
+				function(response){
+					$scope.response = response.data;
+					console.log(JSON.stringify(response) + " " + $scope.response);
+				}, function(response){
+					console.log('error ' + (response));
+				}
+			);
 		}
 		
-		$scope.delete = function(descendiente_id){
-			alert("elimina " + descendiente_id);
-			/*$http.get('<c:url value='/learningresources/ajaxvalue'/>').
-				success(function(data) {
-					$scope.response = data;
-			});*/
+		$scope.delete = function(descendiente_id, nombres, apellidos){
+						
+			if (confirm("¿Desea eliminar descendiente " + nombres + " " + apellidos +" ?") == true) {
+				$http({
+					method: 'DELETE', 
+					url: 'controller/ArbolGenealogicoController.php',
+					params: {
+						descendiente_id : descendiente_id
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
+				}).then(
+					function(response){
+						console.log(JSON.stringify(response));
+						let status = response.data.status;
+						
+						if(status == 'OK'){
+							$http({
+								method: 'GET', 
+								url: 'controller/ArbolGenealogicoController.php',
+								params: {
+									pareja_id : pareja_id,
+									full_content: false
+								},
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+								}
+							}).then(
+								function(response){
+									$scope.descendientes = response.data.descendientes;
+									document.getElementById("addDescendienteForm").reset();
+								}, function(response){
+									console.log('error ' + (response));
+								}
+							);
+						} else{
+							alert("DELSOFT - Hubo un error, contacte al administrador");
+							console.log(JSON.stringify(response) );
+						}
+								
+					}, function(response){
+						alert("DELHARD - Hubo un error, contacte al administrador");
+						console.log(JSON.stringify(response));
+					}
+				);
+			}
 		}		
 
-		$scope.showAddSection = function(){
-			$("#addDescendiente").show();
+		$scope.addNewDescendiente = function(){
+			let ultimoHermanoTd = document.querySelectorAll("td.product-number");
+			let ultimoHermanoText = ultimoHermanoTd[ultimoHermanoTd.length - 1].innerText;
+			
+			document.getElementById("modal-title").innerText = "Agregar Nuevo Descendiente";
+			$scope.newDescendienteNumero = parseInt(ultimoHermanoText) + 1;
 		}	
 		
 		$scope.add = function(files){
@@ -373,35 +479,35 @@
 			   url: 'controller/ArbolGenealogicoController.php',
 			   data: fd,
 			   headers: {'Content-Type': undefined}
-			}).then(function(response){
-				
-				$http({
-					method: 'GET', 
-					url: 'controller/ArbolGenealogicoController.php',
-					params: {
-						pareja_id : pareja_id,
-						full_content: false
-					},
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					}
-				}).then(
-					function(response){
-						$scope.descendientes = response.data.descendientes;
-						document.getElementById("addDescendienteForm").reset();
-					}, function(response){
-						console.log('error ' + (response));
-					}
-				);
-
-            }, function(response){
-                 console.log('error ' + (response));
-            });
-			
-		}	
+			}).then(
+				function(response){
+					$http({
+						method: 'GET', 
+						url: 'controller/ArbolGenealogicoController.php',
+						params: {
+							pareja_id : pareja_id,
+							full_content: false
+						},
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						}
+					}).then(
+						function(response){
+							$scope.descendientes = response.data.descendientes;
+							document.getElementById("addDescendienteForm").reset();
+							$('#modal-dismiss').click();
+						}, function(response){
+							alert("ADDHARD1 - Hubo un error, contacte al administrador");
+							console.log(JSON.stringify(response));
+						}
+					);
+				}, function(response){
+					alert("ADDHARD2 - Hubo un error, contacte al administrador");
+					console.log(JSON.stringify(response));
+				}
+			);
+		}
 	}]);
-
-	
 
 	</script>
 

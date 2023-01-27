@@ -1,7 +1,6 @@
 <?php
 	require '../db/ConnectionManager.php';
 
-
 	class AncestrosService{
 		
 		//public function __construct(){}
