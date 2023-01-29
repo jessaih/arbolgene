@@ -114,13 +114,13 @@
 						" ('".$filename."', ". $familiar_id .");";
 				
 						$connectionManager->connection->query($sql_familiar_info);
-						$response = array("result" => "success");					
+						$response = array("status" => "OK");					
 					} else{
-						$response = array("result" => "error");
+						$response = array("status" => "Error");
 					}
 				}
 			} else{
-				$response = array("result" => "error");
+				$response = array("status" => "Error");
 			}			
 			
 			return $response;

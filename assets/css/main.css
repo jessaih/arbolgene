@@ -321,12 +321,12 @@ p:last-child {
 }
 
 .mb-150 {
-  margin-bottom: 300px;
+  margin-bottom: 150px;
 }
 
 @media only screen and (max-width: 767.96px) {
   .mb-150 {
-    margin-bottom: 250px;
+    margin-bottom: 150px;
   }
 }
 
