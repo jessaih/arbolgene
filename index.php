@@ -59,8 +59,7 @@
 						<!-- menu start -->
 						<nav class="main-menu" style="text-align:left;">
 							<ul>
-								<li><a href="visualiza-ancestros.html">Ver Árbol</a></li>
-								<li><a href="administra-arbol.html">Administrar Árbol</a></li>
+								<li><a href="visualiza-ancestros.html">Ver Ancestros</a></li>
 								<li>&nbsp;</li>
 							</ul>
 						</nav>
