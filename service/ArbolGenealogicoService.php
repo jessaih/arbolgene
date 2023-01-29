@@ -87,7 +87,6 @@
 		
 		public function addNuevoDescendiente(){
 			$response = null;
-			$fileUtil = new FileUtil();
 
 			$connectionManager = new ConnectionManager();
 			//Inserta registro en tabla
@@ -108,16 +107,10 @@
 					$filename = $familiar_id . $_FILES['file']['name'];
 					$location = '../assets/img/album/';
 					
-					//Intenta subir archivo a servidor, de tener exito, inserta información en base de datos
-					if($fileUtil->addImage($filename, $location)){
-						$sql_familiar_info = "INSERT INTO familiar_info (ruta_img, familiar_id_fk) VALUES" .
-						" ('".$filename."', ". $familiar_id .");";
-				
-						$connectionManager->connection->query($sql_familiar_info);
-						$response = array("status" => "OK");					
-					} else{
-						$response = array("status" => "Error");
-					}
+					//Estableciendo ultimo valor en falso ya que la llamada es desde una actualizacion
+					$response = $this->addImageDescendiente($filename, $location, $familiar_id, false);
+				} else{
+					$response = array("status" => "OK");
 				}
 			} else{
 				$response = array("status" => "Error");
@@ -126,8 +119,53 @@
 			return $response;
 		}
 		
-		public function deleteDescendiente($descendiente_id){
+		public function modifyNuevoDescendiente(){
+			
 			$familiarService = new FamiliarService();
+			$descendiente_id = $_POST['descendiente_id'];
+			$descendiente = $familiarService->getDescendiente($descendiente_id);
+			$response = array();
+			
+			if(count($descendiente) > 0){
+				$familiar_id_fk = $descendiente[0]["familiar_id_fk"];
+				$connectionManager = new ConnectionManager();
+				
+				//Actualiza registro en tabla familiar
+				$sql_familiar = "UPDATE familiar SET ".
+				" nombres = '".$_POST["nombres"]."', apellidos = '".$_POST["apellidos"]."', notas = '".$_POST["notas"]."'" .
+				" WHERE familiar_id = " . $familiar_id_fk;
+				$connectionManager->connection->query($sql_familiar);
+				
+				//Actualiza descendiente
+				$sql_descendiente = "UPDATE descendiente SET ".
+				" numero_hermano = ".$_POST["numero"].
+				" WHERE descendiente_id = " . $descendiente_id;
+				$connectionManager->connection->query($sql_descendiente);
+				
+				
+				//Verifica si trae un archivo para subir
+				if(empty($_FILES['file']['name']) == false){
+					//Verifica si hay informacion relacionada al familiar en la tabla famliar_info
+					
+					$filename = $familiar_id_fk . $_FILES['file']['name'];
+					$location = '../assets/img/album/';
+					
+					//Estableciendo ultimo valor en falso ya que la llamada es desde una actualizacion
+					$response = $this->addImageDescendiente($filename, $location, $familiar_id_fk, false);
+				}  else{
+					$response = array("status" => "OK");
+				}
+			}
+			else{
+				$response = array("status" => "Error");
+			}			
+			
+			return $response;
+		}
+		
+		public function deleteDescendiente(){
+			$familiarService = new FamiliarService();
+			$descendiente_id = $_GET['descendiente_id'];
 			$descendiente = $familiarService->getDescendiente($descendiente_id);
 			$result = array();
 			
@@ -180,6 +218,59 @@
 			
 			return $result;
 		}		
+		
+		/* 	Método usado por creacion y actualizacion de descendiente, el ultimo parametro es para diferenciar
+			Si se hace una consulta a la tabla de familiar_info
+		*/
+		
+		private function addImageDescendiente($filename, $location, $familiar_id, $callFromInsert){
+			
+			$fileUtil = new FileUtil();
+			$connectionManager = new ConnectionManager();	
+			$response = array();
+			
+			//Intenta subir archivo a servidor, de tener exito, inserta información en base de datos
+			if($fileUtil->addImage($filename, $location)){
+				$familiarService = new FamiliarService();
+				//Verifica si hay informacion relacionada al familiar en la tabla famliar_info
+				$familiar_info = $familiarService->getFamiliarInfo($familiar_id);
+				$sql_familiar_info = null;
+				
+				//Si hay información se actualiza, de lo contrario se inserta
+				if(count($familiar_info) > 0){
+					$sql_familiar_info = "UPDATE familiar_info SET ".
+					" ruta_img ='".$filename."' " .
+					" WHERE familiar_id_fk = ". $familiar_id ;
+
+					$deleteFilename = $familiar_info[0]["ruta_img"];
+					if($fileUtil->deleteImage($deleteFilename, $location)){
+						$result["status_file"] = "OK";
+					} else{
+						$result["status_file"] = "Error";
+					}
+				} else{
+					$sql_familiar_info = "INSERT INTO familiar_info (ruta_img, familiar_id_fk) VALUES" .
+					" ('".$filename."', ". $familiar_id .");";	
+				}
+				
+				$query_result = $connectionManager->connection->query($sql_familiar_info);
+				
+				if($query_result == TRUE){
+					$response = array("status" => "OK");
+				} else{
+					$response = array("status" => "Error");
+				}
+			} else{
+				$response = array("status" => "Error");
+			}
+			
+			return $response;
+		}
+		
+		private function deleteImageDescendiente($filename, $location){
+			
+		}
+		
 	}
 
 ?> 

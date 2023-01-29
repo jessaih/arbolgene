@@ -4,12 +4,7 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Content-type: application/json');
 	
-	error_log(print_r("Contenido del post " , TRUE));
-	error_log(print_r( $_POST, TRUE));
-	if(isset($_POST['http_put'])){
-		error_log(print_r("aarf ".$_POST['http_put'], TRUE)); 
-	}
-	
+	//error_log(print_r( $_POST, TRUE));
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		$pareja_id = $_GET['pareja_id'];	
@@ -25,19 +20,15 @@
 		$response = $arbolGenealogicoService->addNuevoDescendiente();
 		echo json_encode($response);
 	} 
-	else if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-		$descendiente_id = $_GET['descendiente_id'];
-		
+	else if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){		
 		$arbolGenealogicoService = new ArbolGenealogicoService();
-		$response = $arbolGenealogicoService->deleteDescendiente($descendiente_id);
+		$response = $arbolGenealogicoService->deleteDescendiente();
 		echo json_encode($response);
 	}
-	else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['http_put'] == "true"){		
-		$descendiente_id = $_POST['descendiente_id'];
-		
-		/*$arbolGenealogicoService = new ArbolGenealogicoService();
-		$response = $arbolGenealogicoService->deleteDescendiente($descendiente_id);*/
-		echo json_encode($descendiente_id);
+	else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['http_put'] == "true"){				
+		$arbolGenealogicoService = new ArbolGenealogicoService();
+		$response = $arbolGenealogicoService->modifyNuevoDescendiente();
+		echo json_encode($response);
 	}
 	
 	exit;

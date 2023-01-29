@@ -496,14 +496,13 @@
 							$scope.resetAddModifyForm();
 							$('#modal-dismiss').click();
 						}, function(response){
-							alert("ADDHARD1 - Hubo un error, contacte al administrador");
+							alert("MODHARD1 - Hubo un error, contacte al administrador");
 							console.log(JSON.stringify(response));
 						}
 					);
-					$scope.response = response.data;
-					console.log(JSON.stringify(response) + " " + $scope.response);
 				}, function(response){
-					console.log('error ' + (response));
+					alert("MODHARD2 - Hubo un error, contacte al administrador");
+					console.log(JSON.stringify(response));
 				}
 			);
 		}
@@ -539,7 +538,8 @@
 								function(response){
 									$scope.descendientes = response.data.descendientes;
 								}, function(response){
-									console.log('error ' + (response));
+									alert("DELHARD1 - Hubo un error, contacte al administrador");
+									console.log(JSON.stringify(response));
 								}
 							);
 						} else{
@@ -548,7 +548,7 @@
 						}
 								
 					}, function(response){
-						alert("DELHARD - Hubo un error, contacte al administrador");
+						alert("DELHARD2 - Hubo un error, contacte al administrador");
 						console.log(JSON.stringify(response));
 					}
 				);
