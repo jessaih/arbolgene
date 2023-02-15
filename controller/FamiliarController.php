@@ -1,10 +1,14 @@
 <?php
 
-	header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    
-    include_once '../config/database.php';
-    include_once '../class/employees.php';
-	
+	require '../service/FamiliarService.php';
 
+	header('Access-Control-Allow-Origin: *');
+	header('Content-type: application/json');
+		
+	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+		$familiarService = new FamiliarService();
+		echo $familiarService->getFamiliar();
+	}
+	
+	exit;
 ?>

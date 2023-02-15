@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>Ver Árbol Genealógico</title>
+
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="assets/css/all.min.css">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="assets/css/owl.carousel.css">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<!-- animate css -->
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="assets/css/meanmenu.min.css">
+	<!-- main style -->
+	<link rel="stylesheet" href="assets/css/main.css">
+	<!-- responsive -->
+	<link rel="stylesheet" href="assets/css/responsive.css">
+	<style>
+		.formlabel {
+			font-weight: bold;
+			text-align: right;
+		} 
+		.required{
+			color: red;
+		}		
+	</style>
+
+</head>
+<body>
+	
+	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+	
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="index.html">
+								<img src="assets/img/logo.png" alt="">
+							</a>
+						</div>
+						<!-- logo -->
+
+						<!-- menu start -->
+						<nav class="main-menu" style="text-align:left;">
+							<ul>
+								<li><a href="visualiza-parejas-origen.html">Visualiza Parejas Origen</a></li>
+								<li>&nbsp;</li>
+							</ul>
+						</nav>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+
+	<!-- search area -->
+
+	<!-- end search arewa -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Administra</p>
+						<h1>Pareja</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<br/><br/><br/>
+
+	<!-- products -->
+	<div class="abt-section mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
+						<tr ng-if="!addNewDescendienteCheck" >
+							<td colspan="2" class="product-image-edit" style="text-align: center;">
+								<img ng-src="{{modifyImage}}" alt=""/>
+							</td>
+						</tr>
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+							<td>
+								<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
+							</td>
+						</tr>
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
+							<td> 
+								<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
+								<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+							</td>
+						</tr>								
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
+							<td> 
+								<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
+								<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+							</td>
+						</tr>
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+							<td> 
+								<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
+								</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td > </td>
+							<td class = "formlabel"> 
+								<button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid" ng-if="addNewDescendienteCheck">Crear</button> 
+								<button type="submit" ng-click="modify()" ng-disabled="addDescendienteForm.$invalid" ng-if="!addNewDescendienteCheck">Actualizar</button> 
+								&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-lg-6 col-md-12">
+					<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
+						<tr ng-if="!addNewDescendienteCheck" >
+							<td colspan="2" class="product-image-edit" style="text-align: center;">
+								<img ng-src="{{modifyImage}}" alt=""/>
+							</td>
+						</tr>
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+							<td>
+								<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
+							</td>
+						</tr>
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
+							<td> 
+								<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
+								<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+							</td>
+						</tr>								
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
+							<td> 
+								<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
+								<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+							</td>
+						</tr>								
+						<tr>
+							<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+							<td> 
+								<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
+								</textarea>
+							</td>
+						</tr>								
+						<tr>
+							<td > </td>
+							<td class = "formlabel"> 
+								<button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid" ng-if="addNewDescendienteCheck">Crear</button> 
+								<button type="submit" ng-click="modify()" ng-disabled="addDescendienteForm.$invalid" ng-if="!addNewDescendienteCheck">Actualizar</button> 
+								&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end products -->
+
+	<!-- logo carousel -->
+
+	<!-- end logo carousel -->
+
+	<!-- footer -->
+	<div class="footer-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box about-widget">
+						<h2 class="widget-title">Acerca</h2>
+						<p>
+						Grupo de todos los herederos de los 6 hermanos González González nacidos en Tzurumuato hoy Pastor Ortiz, Michoacán.
+						Nuestros ancestros son:
+						<br/><br/>
+						Teodomira, Eulalia, Josefa, Antonio, Francisca y Maria nacidos entre 1875 y 1890, todos hijos de Francisco González y Francisca González</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box get-in-touch">
+						<h2 class="widget-title">Contactáme</h2>
+						<ul>
+							<li></li>
+							<li>Email: jessaigh@gmail.com</li>
+							<li>Whatsapp</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end footer -->
+	
+	<!-- copyright -->
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end copyright -->
+	
+	<!-- jquery -->
+	<script src="assets/js/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap -->
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="assets/js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="assets/js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="assets/js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="assets/js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="assets/js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="assets/js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="assets/js/sticker.js"></script>
+	<!-- main js -->
+	<script src="assets/js/main.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+	<script>
+	var app = angular.module('App', []);
+
+	app.controller('MyCtrl', ['$scope','$http', function($scope,$http) {
+		const params = new URL(location.href).searchParams;
+		const pareja_id = params.get('pareja_id');
+		const familiar_id = params.get('familiar_id');
+		
+		angular.element(document).ready(function () {
+			$http({
+				method: 'GET', 
+				url: 'controller/FamiliarController.php',
+				params: { },
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}).then(function (response) {
+				console.log(response.data);
+				$scope.response = response.data;
+			});	
+		});
+	}]);
+
+	</script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Administración</title>
+	<title>Administra Descendientes</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -54,7 +54,7 @@
 		
 	</style>
 </head>
-<body ng-app="App" ng-controller="MyCtrl">
+<body ng-app="myApp" ng-controller="MyCtrl">
 	
 	<!--PreLoader-->
     <div class="loader">
@@ -72,7 +72,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.php">
+							<a href="index.html">
 								<img src="assets/img/logo.png" alt="">
 							</a>
 						</div>
@@ -81,7 +81,7 @@
 						<!-- menu start -->
 						<nav class="main-menu" style="text-align:left;">
 							<ul>
-								<li><a href="visualiza-ancestros.html">Ver Ancestros</a></li>
+								<li><a href="visualiza-parejas-origen.html">Visualiza Parejas Origen</a></li>
 								<li>&nbsp;</li>
 							</ul>
 						</nav>
@@ -103,8 +103,8 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Administrar Árbol</p>
-						<h1>Genealógico</h1>
+						<p>Administrar</p>
+						<h1>Descendientes</h1>
 					</div>
 				</div>
 			</div>
@@ -181,10 +181,11 @@
 							<td class="product-edit"><a ng-click="modifyNewDescendiente($index, descendiente.descendiente_id)"  data-toggle="modal" data-target="#myModal"><i class='fas fa-pen' title="Editar"></i></a></td> 
 							<td class="product-remove"><a ng-click="delete(descendiente.descendiente_id, descendiente.nombres, descendiente.apellidos)"><i class='fas fa-trash' title="Eliminar"></i></a></td> 
 							<td class="product-view">
-								<a ng-if="descendiente.numero_parejas > 0" ng-click="view(descendiente.descendiente_id)"><i class='fas fa-eye' title="Ver descendientes"></i></a>
+								<a ng-if="descendiente.numero_parejas > 0" ng-click="viewDescendientes(descendiente.familiar_id_fk)"><i class='fas fa-eye' title="Ver descendientes"></i></a>
+								<a ng-if="descendiente.numero_parejas == 0" ng-click="addPareja(descendiente.familiar_id_fk)"><i class='fas fa-user-plus' title="Agregar Pareja"></i></a>
 							</td>
 						</tr>
-					</tbody>
+					</tbody>					
 					<tfoot>					
 						<tr style="text-align: center; border: solid; border-top-width: 2px; border-color: #efefef;">
 							<td class="add-item" colspan="8" style="font-weight: bold; ">
@@ -213,7 +214,7 @@
 				</div>
 				<div class="modal-body">
 					<form name="addDescendienteForm" id="addDescendienteForm" novalidate>
-						<table cellpadding="12" id="tblForm">
+						<table cellpadding="12">
 							<tr ng-if="!addNewDescendienteCheck" >
 								<td colspan="2" class="product-image-edit" style="text-align: center;">
 									<img ng-src="{{modifyImage}}" alt=""/>
@@ -226,21 +227,21 @@
 								</td>
 							</tr>
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</div></td>
+								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
 								<td> 
 									<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
 									<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
 								</td>
 							</tr>								
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</div></td>
+								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
 								<td> 
 									<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
 									<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
 								</td>
 							</tr>								
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteNumero"># de Hijo/a</label><span class="required"> *</div></td>
+								<td class = "formlabel"><label for="newDescendienteNumero"># de Hijo/a</label><span class="required"> *</span></td>
 								<td> 
 									<input id="newDescendienteNumero" name="newDescendienteNumero" ng-model="newDescendienteNumero" type="number" required/> 
 									<label class="required" ng-show="addDescendienteForm.newDescendienteNumero.$dirty && addDescendienteForm.newDescendienteNumero.$error.required">* Campo Requerido </label>
@@ -249,7 +250,8 @@
 							<tr>
 								<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
 								<td> 
-									<input id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" type="text" /> 
+									<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
+									</textarea>
 								</td>
 							</tr>								
 							<tr>
@@ -313,7 +315,6 @@
 		</div>
 	</div>
 	<!-- end copyright -->
-	
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
@@ -334,266 +335,10 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
-
-	<script src="assets/js/arbol-admin.js"></script>
-
-	<script>
-	var app = angular.module('App', []);
-
-	app.controller('MyCtrl', ['$scope','$http', '$compile', function($scope,$http, $compile) {
-
-		const params = new URL(location.href).searchParams;
-		const pareja_id = params.get('pareja_id');
-		$scope.addNewDescendienteCheck = true;
-		
-		/*$("#myModal").on("hidden.bs.modal", function () {
-			
-		});*/
-		
-		angular.element(document).ready(function () {
-
-			$http({
-				method: 'GET', 
-				url: 'controller/ArbolGenealogicoController.php',
-				params: {
-					pareja_id : pareja_id,
-					full_content: true
-				},
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
-			}).then(function (response) {
-				$scope.descendientes = response.data.descendientes;
-				$scope.pareja = response.data.pareja;
-				$scope.pareja_info = response.data.pareja_info;
-				
-				if($scope.pareja_info.length !== null && $scope.pareja_info.length > 0){
-					document.getElementById("ancestro_img_principal").setAttribute("src", "assets/img/album/" + $scope.pareja_info[0].ruta_img);
-					
-					document.getElementById("ancestro_nota_principal").innerText = $scope.pareja_info[0].notas;
-					if($scope.pareja_info.length > 1){
-						//Estableciendo el indice en 1 para que continue con la secuencia de imagenes
-						var index = 1;
-						document.getElementById("ancestro_galeria").innerHTML = "";
-						while(index < $scope.pareja_info.length){
-							document.getElementById("ancestro_galeria").innerHTML += 
-								"<div class='col-lg-4 col-md-6 text-center strawberry'>" + 
-									"<div class='single-product-item'>" + 
-										"<div class='product-image'>" +
-											"<img src='assets/img/album/" + $scope.pareja_info[index].ruta_img + "' alt=''>" +
-										"</div>" + 
-										"<h3>"+ $scope.pareja_info[index].notas +"</h3>" +
-									"</div>" + 
-								"</div>"
-							;
-							index++;
-						}
-						document.getElementById("ancestro_galeria").innerHTML += "<br/><br/>";
-					}
-				}
-				
-				if($scope.pareja != null){
-					document.getElementById("ancestro_nombres").innerHTML = "<h3 style='text-align: center;'>" + $scope.pareja[0].nom_eo + " " + $scope.pareja[0].ape_eo + "<br/> y <br/>" + $scope.pareja[0].nom_ea + " " + $scope.pareja[0].ape_ea +"</h3>"
-						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_eo + ":</b> " + ($scope.pareja[0].notas_eo == null ? "-" : $scope.pareja[0].notas_eo) + "</p>"
-						+ "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_ea + ":</b> " + ($scope.pareja[0].notas_ea == null ? "-" : $scope.pareja[0].notas_ea) + "</p>";
-				}
-
-			});	
-		});
-
-		$scope.add = function(){
-			let fdAdd = new FormData();
-			
-			let files = document.getElementById('newDescendienteImg').files[0];
-			let nombre = document.getElementById('newDescendienteNombre').value;
-			let apellido = document.getElementById('newDescendienteApellido').value;
-			let numero = document.getElementById('newDescendienteNumero').value;
-			let notas = document.getElementById('newDescendienteNotas').value;
-			
-			fdAdd.append('file',files);
-			fdAdd.append('nombres', nombre);
-			fdAdd.append('apellidos', apellido);
-			fdAdd.append('numero', numero);
-			fdAdd.append('notas', notas);
-			fdAdd.append('pareja_id', pareja_id);
-			fdAdd.append('http_put', false);
-
-			$http({
-			   method: 'POST',
-			   url: 'controller/ArbolGenealogicoController.php',
-			   data: fdAdd,
-			   headers: {'Content-Type': undefined}
-			}).then(
-				function(response){
-					$http({
-						method: 'GET', 
-						url: 'controller/ArbolGenealogicoController.php',
-						params: {
-							pareja_id : pareja_id,
-							full_content: false
-						},
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded'
-						}
-					}).then(
-						function(response){
-							$scope.descendientes = response.data.descendientes;
-							$scope.resetAddModifyForm();
-							$('#modal-dismiss').click();
-						}, function(response){
-							alert("ADDHARD1 - Hubo un error, contacte al administrador");
-							console.log(JSON.stringify(response));
-						}
-					);					
-				}, function(response){
-					alert("ADDHARD2 - Hubo un error, contacte al administrador");
-					console.log(JSON.stringify(response));
-				}
-			);
-		}		
-		
-		$scope.modify = function(){
-			let fdModify = new FormData();
-			
-			let files = document.getElementById('newDescendienteImg').files[0];
-			let nombre = document.getElementById('newDescendienteNombre').value;
-			let apellido = document.getElementById('newDescendienteApellido').value;
-			let numero = document.getElementById('newDescendienteNumero').value;
-			let notas = document.getElementById('newDescendienteNotas').value;
-			let descendiente_id = $scope.descendienteModifyId;
-			
-			fdModify.append('file',files);
-			fdModify.append('nombres', nombre);
-			fdModify.append('apellidos', apellido);
-			fdModify.append('numero', numero);
-			fdModify.append('notas', notas);
-			fdModify.append('descendiente_id', descendiente_id);
-			fdModify.append('http_put', true);
-			
-			$http({
-				method: 'POST', 
-				url: 'controller/ArbolGenealogicoController.php',
-				data: fdModify,
-				headers: {'Content-Type': undefined}
-			}).then(
-				function(response){
-					$http({
-						method: 'GET', 
-						url: 'controller/ArbolGenealogicoController.php',
-						params: {
-							pareja_id : pareja_id,
-							full_content: false
-						},
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded'
-						}
-					}).then(
-						function(response){
-							$scope.descendientes = response.data.descendientes;
-							$scope.resetAddModifyForm();
-							$('#modal-dismiss').click();
-						}, function(response){
-							alert("MODHARD1 - Hubo un error, contacte al administrador");
-							console.log(JSON.stringify(response));
-						}
-					);
-				}, function(response){
-					alert("MODHARD2 - Hubo un error, contacte al administrador");
-					console.log(JSON.stringify(response));
-				}
-			);
-		}
-		
-		$scope.delete = function(descendiente_id, nombres, apellidos){
-						
-			if (confirm("¿Desea eliminar descendiente " + nombres + " " + apellidos +" ?") == true) {
-				$http({
-					method: 'DELETE', 
-					url: 'controller/ArbolGenealogicoController.php',
-					params: {
-						descendiente_id : descendiente_id
-					},
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					}
-				}).then(
-					function(response){
-						let status = response.data.status;
-						
-						if(status == 'OK'){
-							$http({
-								method: 'GET', 
-								url: 'controller/ArbolGenealogicoController.php',
-								params: {
-									pareja_id : pareja_id,
-									full_content: false
-								},
-								headers: {
-									'Content-Type': 'application/x-www-form-urlencoded'
-								}
-							}).then(
-								function(response){
-									$scope.descendientes = response.data.descendientes;
-								}, function(response){
-									alert("DELHARD1 - Hubo un error, contacte al administrador");
-									console.log(JSON.stringify(response));
-								}
-							);
-						} else{
-							alert("DELSOFT - Hubo un error, contacte al administrador");
-							console.log(JSON.stringify(response) );
-						}
-								
-					}, function(response){
-						alert("DELHARD2 - Hubo un error, contacte al administrador");
-						console.log(JSON.stringify(response));
-					}
-				);
-			}
-		}		
-
-		$scope.addNewDescendiente = function(){
-			$scope.resetAddModifyForm();
-			let ultimoHermanoTd = document.querySelectorAll("td.product-number");
-			let ultimoHermanoText = ultimoHermanoTd[ultimoHermanoTd.length - 1].innerText;
-			$scope.newDescendienteNumero = parseInt(ultimoHermanoText) + 1;
-			document.getElementById("modal-title").innerText = "Agregar Nuevo Descendiente";
-			$scope.addNewDescendienteCheck = true;
-		}	
-		
-		$scope.modifyNewDescendiente = function(index, descendienteModifyId){
-			$scope.resetAddModifyForm();
-			document.getElementById("modal-title").innerText = "Modificar Descendiente";
-			$scope.addNewDescendienteCheck = false;
-			$scope.modifyImage = document.getElementById("img" + index).src;
-			$scope.descendienteModifyId = descendienteModifyId;
-			
-			let nombres = document.querySelector("#tr" + index + " td.product-name").innerText.trim();
-			let apellidos = document.querySelector("#tr" + index + " td.product-lastname").innerText.trim();
-			let numero_hermano = document.querySelector("#tr" + index + " td.product-number").innerText.trim();
-			let notas = document.querySelector("#tr" + index + " td.product-notas ").innerText.trim();
-			
-			$scope.newDescendienteNombre = nombres;
-			$scope.newDescendienteApellido = apellidos;
-			$scope.newDescendienteNumero = parseInt(numero_hermano);
-			$scope.newDescendienteNotas = notas;
-		}
-
-		$scope.resetAddModifyForm = function(){
-			$scope.newDescendienteNombre = "";
-			$scope.newDescendienteApellido = "";
-			$scope.newDescendienteNumero = 0;
-			$scope.newDescendienteNotas = "";
-			$scope.newDescendienteImg = null;
-			document.getElementById("newDescendienteImg").value = '';
-		}
-	}]);
-
-	</script>
-
-
-
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script>
+	
+	<script type="text/javascript" src="assets/angular/arbol-admin.js"></script>		
 </body>
+
 </html>

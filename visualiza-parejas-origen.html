@@ -7,7 +7,7 @@
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Ver Árbol Genealógico</title>
+	<title>Visualiza Parejas Origen</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -50,7 +50,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.php">
+							<a href="index.html">
 								<img src="assets/img/logo.png" alt="">
 							</a>
 						</div>
@@ -59,7 +59,7 @@
 						<!-- menu start -->
 						<nav class="main-menu" style="text-align:left;">
 							<ul>
-								<li><a href="visualiza-ancestros.html">Ver Ancestros</a></li>
+								<li><a href="visualiza-parejas-origen.html">Visualiza Parejas Origen</a></li>
 								<li>&nbsp;</li>
 							</ul>
 						</nav>
@@ -81,8 +81,8 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Ver</p>
-						<h1>Ancestros</h1>
+						<p>Visualiza</p>
+						<h1>Parejas Origen</h1>
 					</div>
 				</div>
 			</div>
@@ -98,8 +98,8 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">Ancestros</span> Registrados</h3>
-						<p>Para ver los descendientes de cada pareja de ancestros, da click en su imagen o nombre.</p>
+						<h3><span class="orange-text">Parejas</span> Registrados</h3>
+						<p>Para ver los descendientes de cada pareja origen, da click en su imagen o nombres.</p>
 					</div>
 				</div>
 			</div>		
@@ -108,7 +108,7 @@
 				<div class="col-lg-4 col-md-6 text-center strawberry">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="administra-arbol.html?pareja_id={{ancestros.pareja_id}}">
+							<a href="administra-descendientes.html?pareja_id={{ancestros.pareja_id}}">
 								<img ng-if="ancestros.pi_img" ng-src="assets/img/album/{{ancestros.pi_img}}" alt="">
 								<img ng-if="!ancestros.pi_img" ng-src="assets/img/album/no_img.png" alt="">
 								<h3>{{ancestros.nom_eo}} {{ancestros.ape_eo}} <br/> & <br/> {{ancestros.nom_ea}} {{ancestros.ape_ea}}</h3>								
@@ -197,13 +197,12 @@
 		angular.element(document).ready(function () {
 			$http({
 				method: 'GET', 
-				url: 'controller/AncestrosController.php',
+				url: 'controller/ArbolGenealogicoController.php',
 				params: { },
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			}).then(function (response) {
-				console.log(response.data);
 				$scope.response = response.data;
 			});	
 		});
