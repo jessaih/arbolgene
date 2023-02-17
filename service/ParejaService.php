@@ -25,7 +25,7 @@
 
 		public function getPareja($pareja_id){
 			$connectionManager = new ConnectionManager();
-			$pareja = array();	
+			$pareja = array();
 			
 			$sql_pareja = "SELECT p.pareja_id as pareja_id,
 					f_esposa.familiar_id as ea_id, f_esposa.nombres as nom_ea, f_esposa.apellidos as ape_ea, f_esposa.notas as notas_ea,
@@ -64,6 +64,31 @@
 			}
 			return $pareja;
 		}	
+		
+		/*public function addNuevaPareja($nombr){
+			$response = null;
+			
+			$familiarService = new FamiliarService();
+			$familiar_id = $familiarService->addNuevoFamiliar($_POST["nombres"], $_POST["apellidos"], $_POST["notas"]);
+			
+			if($familiar_id != null){
+				
+				//Verifica si trae un archivo para subir
+				if(empty($_FILES['file']['name']) == false){
+					$filename = $familiar_id . $_FILES['file']['name'];
+					$location = '../assets/img/album/';
+					
+					//Estableciendo ultimo valor en falso ya que la llamada es desde una actualizacion
+					$response = $familiarService->addImageDescendiente($filename, $location, $familiar_id);
+				} else{
+					$response = array("status" => "OK");
+				}
+			} else{
+				$response = array("status" => "Error");
+			}			
+			
+			return $response;
+		}*/		
 	}
 
 ?>

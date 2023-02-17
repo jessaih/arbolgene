@@ -37,11 +37,17 @@
 		} 
 		.required{
 			color: red;
+		}
+		td.product-image-edit img {
+			max-width: 175px;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			margin-bottom: 0;
 		}		
 	</style>
 
 </head>
-<body>
+<body ng-app="myApp" ng-controller="MyCtrl">
 	
 	<!--PreLoader-->
     <div class="loader">
@@ -82,7 +88,7 @@
 
 	<!-- search area -->
 
-	<!-- end search arewa -->
+	<!-- end search area -->
 	
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
@@ -98,100 +104,116 @@
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-
 	<br/><br/><br/>
-
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Añade</span> Pareja</h3>
+						<p>Completa el o los formularios necesarios para formar una pareja</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 	<!-- products -->
 	<div class="abt-section mb-150">
 		<div class="container">
 			<div class="row">
+				<!-- *********************-->
+				<!-- First column of data-->
+				<!-- *********************-->			
 				<div class="col-lg-6 col-md-12">
-					<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
-						<tr ng-if="!addNewDescendienteCheck" >
-							<td colspan="2" class="product-image-edit" style="text-align: center;">
-								<img ng-src="{{modifyImage}}" alt=""/>
-							</td>
-						</tr>
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
-							<td>
-								<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
-							</td>
-						</tr>
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
-							<td> 
-								<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
-								<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
-							</td>
-						</tr>								
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
-							<td> 
-								<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
-								<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
-							</td>
-						</tr>
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
-							<td> 
-								<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
-								</textarea>
-							</td>
-						</tr>
-						<tr>
-							<td > </td>
-							<td class = "formlabel"> 
-								<button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid" ng-if="addNewDescendienteCheck">Crear</button> 
-								<button type="submit" ng-click="modify()" ng-disabled="addDescendienteForm.$invalid" ng-if="!addNewDescendienteCheck">Actualizar</button> 
-								&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
-							</td>
-						</tr>
-					</table>
+					<form name="leftParejaForm" id="rightParejaForm" novalidate>
+						<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
+							<tr >
+								<td colspan="2" class="product-image-edit" style="text-align: center;">
+									<img ng-src="{{leftImage}}" alt=""/>
+								</td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+								<td>
+									<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" ng-disabled="leftDisabled" />
+								</td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
+								<td> 
+									<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="familiar.nombres" type="text" required ng-disabled="leftDisabled" /> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+								</td>
+							</tr>								
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
+								<td> 
+									<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="familiar.apellidos" type="text" required ng-disabled="leftDisabled"/> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+								</td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+								<td> 
+									<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="familiar.notas" rows="6" cols="40" style="resize: none;" ng-disabled="leftDisabled"> 
+									</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td > </td>
+								<td class = "formlabel"> 
+									<input type="reset"  ng-disabled="leftDisabled"/> 
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
+				<!-- *********************-->
+				<!-- Second column of data-->
+				<!-- *********************-->
 				<div class="col-lg-6 col-md-12">
-					<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
-						<tr ng-if="!addNewDescendienteCheck" >
-							<td colspan="2" class="product-image-edit" style="text-align: center;">
-								<img ng-src="{{modifyImage}}" alt=""/>
-							</td>
-						</tr>
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
-							<td>
-								<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
-							</td>
-						</tr>
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
-							<td> 
-								<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
-								<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
-							</td>
-						</tr>								
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
-							<td> 
-								<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
-								<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
-							</td>
-						</tr>								
-						<tr>
-							<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
-							<td> 
-								<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
-								</textarea>
-							</td>
-						</tr>								
-						<tr>
-							<td > </td>
-							<td class = "formlabel"> 
-								<button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid" ng-if="addNewDescendienteCheck">Crear</button> 
-								<button type="submit" ng-click="modify()" ng-disabled="addDescendienteForm.$invalid" ng-if="!addNewDescendienteCheck">Actualizar</button> 
-								&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
-							</td>
-						</tr>
-					</table>
+					<form name="rightParejaForm" id="rightParejaForm" novalidate>
+						<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
+							<tr>
+								<td colspan="2" class="product-image-edit" style="text-align: center;">
+									<img ng-src="{{rightImage}}" alt=""/>
+								</td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+								<td>
+									<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
+								</td>
+							</tr>
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
+								<td> 
+									<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+								</td>
+							</tr>								
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
+								<td> 
+									<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
+									<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+								</td>
+							</tr>								
+							<tr>
+								<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+								<td> 
+									<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
+									</textarea>
+								</td>
+							</tr>								
+							<tr>
+								<td > </td>
+								<td class = "formlabel"> 
+									<button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid" >Crear pareja</button> 
+									&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -264,28 +286,44 @@
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script>
 
 	<script>
-	var app = angular.module('App', []);
+	var app = angular.module('myApp', []);
 
 	app.controller('MyCtrl', ['$scope','$http', function($scope,$http) {
 		const params = new URL(location.href).searchParams;
-		const pareja_id = params.get('pareja_id');
 		const familiar_id = params.get('familiar_id');
+		const server_image_path = "assets/img/album/";
+		const no_img = server_image_path + "no_img.png";
 		
+		$scope.leftImage = no_img;
+		$scope.rightImage = no_img;
+				
 		angular.element(document).ready(function () {
-			$http({
-				method: 'GET', 
-				url: 'controller/FamiliarController.php',
-				params: { },
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
-			}).then(function (response) {
-				console.log(response.data);
-				$scope.response = response.data;
-			});	
+			if(familiar_id !== null){
+				$http({
+					method: 'GET', 
+					url: 'controller/FamiliarController.php',
+					params: { 
+						familiar_id : familiar_id
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
+				}).then(function (response) {
+					
+					$scope.familiar = response.data.familiar[0];
+					$scope.leftImage = server_image_path + response.data.familiar_info[0].ruta_img;
+					$scope.leftDisabled = true;
+					console.log(response.data);
+					console.log($scope.familiar);
+					console.log($scope.familiar_info);
+				});	
+			} else{
+				console.log("Familiar_id nulo " )
+			}
+			
 		});
 	}]);
 

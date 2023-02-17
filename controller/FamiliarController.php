@@ -6,8 +6,9 @@
 	header('Content-type: application/json');
 		
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+		$familiar_id = $_GET['familiar_id'];
 		$familiarService = new FamiliarService();
-		echo $familiarService->getFamiliar();
+		echo json_encode($familiarService->getDetalleFamiliar($familiar_id));
 	}
 	
 	exit;

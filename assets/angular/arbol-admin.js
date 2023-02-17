@@ -86,6 +86,7 @@
 			   headers: {'Content-Type': undefined}
 			}).then(
 				function(response){
+					console.log(response.data);
 					$http({
 						method: 'GET', 
 						url: 'controller/DescendienteController.php',

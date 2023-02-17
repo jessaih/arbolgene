@@ -19,15 +19,28 @@
 		}
 	}
 	else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['http_put'] == "false") {	
-		$response = $descendienteService->addNuevoDescendiente();
+		$nombres = $_POST["nombres"];
+		$apellidos = $_POST["apellidos"];
+		$notas = $_POST["notas"];
+		$pareja_id = $_POST["pareja_id"];
+		$numero_hijo = $_POST["numero"];
+		
+		$response = $descendienteService->addNuevoDescendiente($nombres, $apellidos, $notas, $pareja_id, $numero_hijo);
 		echo json_encode($response);
 	} 
 	else if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){		
-		$response = $descendienteService->deleteDescendiente();
+		$descendiente_id = $_GET['descendiente_id'];
+		$response = $descendienteService->deleteDescendiente($descendiente_id);
 		echo json_encode($response);
 	}
-	else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['http_put'] == "true"){				
-		$response = $descendienteService->modifyNuevoDescendiente();
+	else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['http_put'] == "true"){	
+		$nombres = $_POST["nombres"];
+		$apellidos = $_POST["apellidos"];
+		$notas = $_POST["notas"];
+		$descendiente_id = $_POST['descendiente_id'];
+		$numero_hijo = $_POST["numero"];
+		
+		$response = $descendienteService->modifyDescendiente($nombres, $apellidos, $notas, $descendiente_id, $numero_hijo);
 		echo json_encode($response);
 	}
 	
