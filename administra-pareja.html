@@ -124,7 +124,7 @@
 				<!-- First column of data-->
 				<!-- *********************-->			
 				<div class="col-lg-6 col-md-12">
-					<form name="leftParejaForm" id="rightParejaForm" novalidate>
+					<form name="leftParejaForm" id="leftParejaForm" novalidate>
 						<table class="cart-table" style="border: 1px solid black;" cellpadding="12" >				
 							<tr >
 								<td colspan="2" class="product-image-edit" style="text-align: center;">
@@ -132,29 +132,29 @@
 								</td>
 							</tr>
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+								<td class = "formlabel"><label for="newParejaImg">Imagen</label></td>
 								<td>
-									<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" ng-disabled="leftDisabled" />
+									<input id="LFnewParejaImg" name="LFnewParejaImg" ng-model="LFnewParejaImg" type = "file" ng-disabled="leftDisabled" />
 								</td>
 							</tr>
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
+								<td class = "formlabel"><label for="newParejaNombre">Nombre</label> <span class="required"> *</span></td>
 								<td> 
-									<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="familiar.nombres" type="text" required ng-disabled="leftDisabled" /> 
-									<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+									<input id="LFnewParejaNombre" name="LFnewParejaNombre" ng-model="LFnewParejaNombre" type="text" required ng-disabled="leftDisabled" /> 
+									<label class="required" ng-show="leftParejaForm.LFnewParejaNombre.$dirty && leftParejaForm.LFnewParejaNombre.$error.required">* Campo Requerido</label>
 								</td>
 							</tr>								
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
+								<td class = "formlabel"><label for="LFnewParejaApellido">Apellidos</label><span class="required"> *</span></td>
 								<td> 
-									<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="familiar.apellidos" type="text" required ng-disabled="leftDisabled"/> 
-									<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+									<input id="LFnewParejaApellido" name="LFnewParejaApellido" ng-model="LFnewParejaApellido" type="text" required ng-disabled="leftDisabled"/> 
+									<label class="required" ng-show="leftParejaForm.LFnewParejaApellido.$dirty && leftParejaForm.LFnewParejaApellido.$error.required">* Campo Requerido</label>
 								</td>
 							</tr>
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+								<td class = "formlabel"><label for="LFnewParejaNotas">Notas</label></td>
 								<td> 
-									<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="familiar.notas" rows="6" cols="40" style="resize: none;" ng-disabled="leftDisabled"> 
+									<textarea id="LFnewParejaNotas" name="LFnewParejaNotas" ng-model="LFnewParejaNotas" rows="6" cols="40" style="resize: none;" ng-disabled="leftDisabled"> 
 									</textarea>
 								</td>
 							</tr>
@@ -179,36 +179,36 @@
 								</td>
 							</tr>
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
+								<td class = "formlabel"><label for="RFnewParejaImg">Imagen</label></td>
 								<td>
-									<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
+									<input id="RFnewParejaImg" name="RFnewParejaImg" ng-model="RFnewParejaImg" type = "file" />
 								</td>
 							</tr>
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteNombre">Nombre</label> <span class="required"> *</span></td>
+								<td class = "formlabel"><label for="RFnewParejaNombre">Nombre</label> <span class="required"> *</span></td>
 								<td> 
-									<input id="newDescendienteNombre" name="newDescendienteNombre" ng-model="newDescendienteNombre" type="text" required /> 
-									<label class="required" ng-show="addDescendienteForm.newDescendienteNombre.$dirty && addDescendienteForm.newDescendienteNombre.$error.required">* Campo Requerido</label>
+									<input id="RFnewParejaNombre" name="RFnewParejaNombre" ng-model="RFnewParejaNombre" type="text" required /> 
+									<label class="required" ng-show="rightParejaForm.RFnewParejaNombre.$dirty && rightParejaForm.RFnewParejaNombre.$error.required">* Campo Requerido</label>
 								</td>
 							</tr>								
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteApellido">Apellidos</label><span class="required"> *</span></td>
+								<td class = "formlabel"><label for="RFnewParejaApellido">Apellidos</label><span class="required"> *</span></td>
 								<td> 
-									<input id="newDescendienteApellido" name="newDescendienteApellido" ng-model="newDescendienteApellido" type="text" required/> 
-									<label class="required" ng-show="addDescendienteForm.newDescendienteApellido.$dirty && addDescendienteForm.newDescendienteApellido.$error.required">* Campo Requerido</label>
+									<input id="RFnewParejaApellido" name="RFnewParejaApellido" ng-model="RFnewParejaApellido" type="text" required/> 
+									<label class="required" ng-show="rightParejaForm.RFnewParejaApellido.$dirty && rightParejaForm.RFnewParejaApellido.$error.required">* Campo Requerido</label>
 								</td>
 							</tr>								
 							<tr>
-								<td class = "formlabel"><label for="newDescendienteNotas">Notas</label></td>
+								<td class = "formlabel"><label for="RFnewParejaNotas">Notas</label></td>
 								<td> 
-									<textarea id="newDescendienteNotas" name="newDescendienteNotas" ng-model="newDescendienteNotas" rows="6" cols="40" style="resize: none;"> 
+									<textarea id="RFnewParejaNotas" name="RFnewParejaNotas" ng-model="RFnewParejaNotas" rows="6" cols="40" style="resize: none;"> 
 									</textarea>
 								</td>
 							</tr>								
 							<tr>
 								<td > </td>
 								<td class = "formlabel"> 
-									<button type="submit" ng-click="add()" ng-disabled="addDescendienteForm.$invalid" >Crear pareja</button> 
+									<button type="submit" ng-click="addParejaADescendiente()" ng-disabled="rightParejaForm.$invalid" >Crear pareja</button> 
 									&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
 								</td>
 							</tr>
@@ -294,6 +294,7 @@
 	app.controller('MyCtrl', ['$scope','$http', function($scope,$http) {
 		const params = new URL(location.href).searchParams;
 		const familiar_id = params.get('familiar_id');
+		const pareja_id = params.get('pareja_id');
 		const server_image_path = "assets/img/album/";
 		const no_img = server_image_path + "no_img.png";
 		
@@ -312,19 +313,86 @@
 						'Content-Type': 'application/x-www-form-urlencoded'
 					}
 				}).then(function (response) {
-					
-					$scope.familiar = response.data.familiar[0];
-					$scope.leftImage = server_image_path + response.data.familiar_info[0].ruta_img;
+					$scope.LFfamiliar = response.data.familiar[0];
+                                        if(response.data.familiar_info.length > 0){
+                                            $scope.leftImage = server_image_path + response.data.familiar_info[0].ruta_img;
+                                        }
 					$scope.leftDisabled = true;
-					console.log(response.data);
-					console.log($scope.familiar);
-					console.log($scope.familiar_info);
+//					console.log(response.data);
 				});	
 			} else{
-				console.log("Familiar_id nulo " )
+                             $http({
+                                method: 'GET',
+                                url: 'controller/ParejaController.php',
+                                params: {
+                                    pareja_id: pareja_id,
+                                    full_content: true
+                                },
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                }
+                            }).then(function (response) {
+                                console.log(response.data);
+                                if(response.data.status ==="OK"){
+                                    var pareja = response.data.pareja[0];
+                                    var pareja_info = response.data.pareja_info;
+
+
+                                    $scope.LFnewParejaNombre = pareja.nom_eo;
+                                    $scope.LFnewParejaApellido = pareja.ape_eo;
+                                    $scope.LFnewParejaNotas = pareja.notas_eo;
+
+                                    $scope.RFnewParejaNombre = pareja.nom_ea;
+                                    $scope.RFnewParejaApellido = pareja.ape_ea;
+                                    $scope.RFnewParejaNotas = pareja.notas_ea;
+
+    //                                if(response.data.familiar_info.length > 0){
+    //                                    $scope.leftImage = server_image_path + response.data.familiar_info[0].ruta_img;
+    //                                }
+                                }
+                            });
 			}
-			
 		});
+                
+                
+                $scope.addParejaADescendiente = function(){
+			let fdAdd = new FormData();
+			
+			let files = document.getElementById('RFnewParejaImg').files[0];
+			let nombre = document.getElementById('RFnewParejaNombre').value;
+			let apellido = document.getElementById('RFnewParejaApellido').value;
+			let notas = document.getElementById('RFnewParejaNotas').value;
+			
+			fdAdd.append('file',files);
+			fdAdd.append('nombres', nombre);
+			fdAdd.append('apellidos', apellido);
+			fdAdd.append('notas', notas);
+			fdAdd.append('familiar_id', familiar_id);
+
+			$http({
+                            method: 'POST',
+                            url: 'controller/ParejaController.php',
+                            data: fdAdd,
+                            headers: {'Content-Type': undefined, 'Process-Data': false}
+			}).then(
+				function(response){
+                                    console.log(response);
+                                    if(response.statusText ==="OK" ){
+                                        alert("Pareja añadida exitosamente");
+                                        var query = new URLSearchParams();
+                                        query.append("pareja_id", response.data.pareja_id);
+                                        location.href = "administra-descendientes.html?" + query.toString();
+                                    } else{
+                                        alert("ADDPAREJASOFT1 - Hubo un error, contacte al administrador");
+					console.log(JSON.stringify(response));
+                                    }
+                                        
+				}, function(response){
+					alert("ADDPAREJAHARD1 - Hubo un error, contacte al administrador");
+					console.log(JSON.stringify(response));
+				}
+			);
+		};
 	}]);
 
 	</script>

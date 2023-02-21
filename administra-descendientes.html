@@ -133,10 +133,10 @@
 	<!-- end single product -->
 
 	<!-- products -->
-	<div class="product-section mt-150 mb-150">
+	<div id = "product-section" class="product-section mt-150 mb-150">
 		<div class="container">
 			<div id="ancestro_galeria" class="row product-lists">
-				<div class="col-lg-4 col-md-6 text-center strawberry">
+				<div class="col-lg-4 col-md-6 text-center">
 					<div  class="single-product-item">
 						<div class="product-image">
 							<img src="assets/img/album/no_img.png" alt=""/>
@@ -148,6 +148,7 @@
 		</div>
 	</div>
 	<!-- end products -->
+        <!--<br/><br/><br/><br/>-->
 	<!-- cart -->
 	<div class="cart-section mt-150 mb-150">
 		<div class="container">
@@ -223,7 +224,7 @@
 							<tr>
 								<td class = "formlabel"><label for="newDescendienteImg">Imagen</label></td>
 								<td>
-									<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file" name="file" />
+									<input id="newDescendienteImg" name="newDescendienteImg" ng-model="newDescendienteImg" type = "file"  />
 								</td>
 							</tr>
 							<tr>
@@ -336,9 +337,9 @@
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
 	
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script>
 	
-	<script type="text/javascript" src="assets/angular/arbol-admin.js"></script>		
+	<script src="assets/angular/arbol-admin.js"></script>		
 </body>
 
 </html>

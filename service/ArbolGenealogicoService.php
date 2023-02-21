@@ -2,7 +2,7 @@
 
 	require_once '../db/ConnectionManager.php';
 	require_once 'DescendienteService.php';
-	require 'ParejaService.php';
+	require_once 'ParejaService.php';
 
 	class ArbolGenealogicoService{
 		
@@ -11,7 +11,7 @@
 			$parejaService = new ParejaService();
 			$descendienteService = new DescendienteService();
 			
-			$pareja = $parejaService->getPareja($pareja_id);
+			$pareja = $parejaService->getParejaById($pareja_id);
 			$pareja_info = $parejaService->getParejaInfo($pareja_id);
 			$descendientes = $descendienteService->getDetalleDescendientes($pareja_id);
 			

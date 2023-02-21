@@ -93,8 +93,8 @@
 
 
 	<!-- products -->
-	<div class="product-section mt-150 mb-150" ng-app="App">
-		<div class="container" ng-controller="MyCtrl">
+	<div id="product-section" class="product-section mt-150 mb-150" ng-app="App" ng-controller="MyCtrl">
+		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
@@ -104,15 +104,11 @@
 				</div>
 			</div>		
 		
-			<div id="origen-ancestros" class="row product-lists" ng-repeat="ancestros in response">
-				<div class="col-lg-4 col-md-6 text-center strawberry">
-					<div class="single-product-item">
+			<div id="origen-ancestros" class="row product-lists" >
+				<div class="col-lg-4 col-md-6 text-center" >
+					<div class="single-product-item" >
 						<div class="product-image">
-							<a href="administra-descendientes.html?pareja_id={{ancestros.pareja_id}}">
-								<img ng-if="ancestros.pi_img" ng-src="assets/img/album/{{ancestros.pi_img}}" alt="">
-								<img ng-if="!ancestros.pi_img" ng-src="assets/img/album/no_img.png" alt="">
-								<h3>{{ancestros.nom_eo}} {{ancestros.ape_eo}} <br/> & <br/> {{ancestros.nom_ea}} {{ancestros.ape_ea}}</h3>								
-							</a>
+                                                    <img src="assets/img/album/no_img.png" alt="">
 						</div>
 						
 					</div>
@@ -203,7 +199,30 @@
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			}).then(function (response) {
-				$scope.response = response.data;
+				var data = response.data;
+                                if(data.length > 0){
+
+                                    var index = 0;
+                                    document.getElementById("origen-ancestros").innerHTML = "";
+                                    while (index < data.length) {
+                                        document.getElementById("origen-ancestros").innerHTML +=
+                                                "<div class='col-lg-4 col-md-6 text-center'>" +
+                                                "<div class='single-product-item'>" +
+                                                "<div class='product-image'>" +
+                                                    "<a href='administra-descendientes.html?pareja_id=" + data[index].pareja_id + "'>" +
+                                                        "<img src='assets/img/album/" + (data[index].pi_img === null ? "no_img.png" : data[index].pi_img) + "' alt=''>" +
+                                                        "<h3>" + data[index].nom_eo + " " + data[index].ape_eo +" <br/> & <br/> " + data[index].nom_ea + " " + data[index].ape_ea + "</h3>" +
+                                                    "</a>" +
+                                                "</div>" +
+                                                "</div>" +
+                                                "</div>";
+                                        index++;
+                                    }
+                                    
+                                    var indexFactor = index / 3 ;
+                                    indexFactor = (indexFactor * 450);
+                                    document.getElementById("product-section").style.marginBottom = indexFactor.toString() + "px";
+                                }
 			});	
 		});
 	}]);
