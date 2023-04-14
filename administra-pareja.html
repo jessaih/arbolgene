@@ -104,18 +104,22 @@
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-	<br/><br/><br/>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">Añade</span> Pareja</h3>
-						<p>Completa el o los formularios necesarios para formar una pareja</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	
+	<br/><br/>
+        <div class="container">
+                <div class="row">
+                        <div class="col-lg-8 offset-lg-2 text-center">
+                                <div class="section-title" ng-if="addPareja">
+                                        <h3><span class="orange-text">Añade</span> Pareja</h3>
+                                        <p>Completa el o los formularios necesarios para formar una pareja</p>
+                                </div>
+                                <div class="section-title" ng-if="editPareja">
+                                        <h3><span class="orange-text">Actualiza</span> Pareja</h3>
+                                        <p>Modifica la información que desees de la pareja</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        
 	<!-- products -->
 	<div class="abt-section mb-150">
 		<div class="container">
@@ -160,8 +164,8 @@
 							</tr>
 							<tr>
 								<td > </td>
-								<td class = "formlabel"> 
-									<input type="reset"  ng-disabled="leftDisabled"/> 
+								<td class = "formlabel">
+									<input type="reset" ng-disabled="leftDisabled"/> 
 								</td>
 							</tr>
 						</table>
@@ -208,18 +212,51 @@
 							<tr>
 								<td > </td>
 								<td class = "formlabel"> 
-									<button type="submit" ng-click="addParejaADescendiente()" ng-disabled="rightParejaForm.$invalid" >Crear pareja</button> 
-									&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
+									<input type="reset"/> 
 								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
 			</div>
+                        <br/><br/>
+                        <table class='cart-table' style="border: 1px solid black;width: 50%; margin-left: auto; margin-right: auto;" cellpadding="12" >
+                            <tr>
+                                    <td colspan="2" style="text-align: center; font-weight: bold;">Cargar imagen principal de la pareja (reemplazará la existente)</td>
+                            </tr>
+                            <tr >
+                                    <td colspan="2" class="product-image-edit" style="text-align: center;">
+                                        <img ng-src="{{centerParejaImage}}" alt=""/>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td class = "formlabel"><label for="CFnewParejaImg">Imagen</label></td>
+                                    <td align='center'>
+                                            <input id="CFnewParejaImg" name="CFnewParejaImg" ng-model="CFnewParejaImg" type = "file" />
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td class = "formlabel"><label for="CFimgParejaNotas">Notas</label></td>
+                                    <td align="center"> 
+                                            <textarea id="CFimgParejaNotas" name="CFimgParejaNotas" ng-model="CFimgParejaNotas" rows="6" cols="40" style="resize: none;"> 
+                                            </textarea>
+                                    </td>
+                            </tr>                                                               
+                            <tr> 
+                                    <td colspan="2" align='center'>
+                                            <br/><br/>
+                                            <a ng-click='modifyParejaCompleta()' class='cart-btn' ng-disabled="rightParejaForm.$invalid && lefttParejaForm.$invalid" ng-if="editPareja">
+                                                    <i class='fas fa-pen' title='Editar'></i> Actualizar info pareja
+                                            </a> 
+                                            <a ng-click='addParejaADescendiente()' class='cart-btn' ng-disabled="rightParejaForm.$invalid" ng-if="addPareja">
+                                                    <i class='fas fa-pen' title='Editar'></i> Crear pareja
+                                            </a> 
+                                    </td>  
+                            </tr>
+                        </table>
 		</div>
-	</div>
+	</div>    
 	<!-- end products -->
-
 	<!-- logo carousel -->
 
 	<!-- end logo carousel -->
@@ -300,9 +337,13 @@
 		
 		$scope.leftImage = no_img;
 		$scope.rightImage = no_img;
+		$scope.centerParejaImage = no_img;
+                $scope.addPareja = false;
+                $scope.editPareja = false;
 				
 		angular.element(document).ready(function () {
 			if(familiar_id !== null){
+                            $scope.addPareja = true;
 				$http({
 					method: 'GET', 
 					url: 'controller/FamiliarController.php',
@@ -313,42 +354,58 @@
 						'Content-Type': 'application/x-www-form-urlencoded'
 					}
 				}).then(function (response) {
-					$scope.LFfamiliar = response.data.familiar[0];
-                                        if(response.data.familiar_info.length > 0){
-                                            $scope.leftImage = server_image_path + response.data.familiar_info[0].ruta_img;
+                                        var familiar = response.data.familiar[0];
+                                        var familiar_info = response.data.familiar_info;
+
+                                        $scope.LFnewParejaNombre = familiar.nombres;
+                                        $scope.LFnewParejaApellido = familiar.apellidos; 
+                                        $scope.LFnewParejaNotas = familiar.notas;
+                                        
+                                        
+                                        if(familiar_info !== null && familiar_info.length > 0){
+                                            $scope.leftImage = server_image_path + familiar_info[0].ruta_img;
                                         }
 					$scope.leftDisabled = true;
 //					console.log(response.data);
 				});	
-			} else{
+			} else if (pareja_id !== null){
+                            $scope.editPareja = true;
                              $http({
                                 method: 'GET',
                                 url: 'controller/ParejaController.php',
                                 params: {
-                                    pareja_id: pareja_id,
-                                    full_content: true
+                                    pareja_id: pareja_id
                                 },
                                 headers: {
                                     'Content-Type': 'application/x-www-form-urlencoded'
                                 }
                             }).then(function (response) {
-                                console.log(response.data);
                                 if(response.data.status ==="OK"){
                                     var pareja = response.data.pareja[0];
                                     var pareja_info = response.data.pareja_info;
+                                    var familiar_eo_info = response.data.familiar_eo_info;
+                                    var familiar_ea_info = response.data.familiar_ea_info;
 
-
+                                    $scope.LFID = pareja.eo_id;
                                     $scope.LFnewParejaNombre = pareja.nom_eo;
                                     $scope.LFnewParejaApellido = pareja.ape_eo;
                                     $scope.LFnewParejaNotas = pareja.notas_eo;
 
+                                    $scope.RFID = pareja.ea_id;
                                     $scope.RFnewParejaNombre = pareja.nom_ea;
                                     $scope.RFnewParejaApellido = pareja.ape_ea;
                                     $scope.RFnewParejaNotas = pareja.notas_ea;
-
-    //                                if(response.data.familiar_info.length > 0){
-    //                                    $scope.leftImage = server_image_path + response.data.familiar_info[0].ruta_img;
-    //                                }
+                                    
+                                    if(familiar_eo_info !== null && familiar_eo_info.length > 0){
+                                        $scope.leftImage = server_image_path + familiar_eo_info[0].ruta_img;
+                                    }
+                                    if(familiar_ea_info !== null && familiar_ea_info.length > 0){
+                                        $scope.rightImage = server_image_path + familiar_ea_info[0].ruta_img;
+                                    }
+                                    if(pareja_info !== null && pareja_info.length > 0){
+                                        $scope.centerParejaImage = server_image_path + pareja_info[0].ruta_img;
+                                        $scope.CFimgParejaNotas = pareja_info[0].notas;
+                                    }
                                 }
                             });
 			}
@@ -363,11 +420,18 @@
 			let apellido = document.getElementById('RFnewParejaApellido').value;
 			let notas = document.getElementById('RFnewParejaNotas').value;
 			
+                        //Se obtiene imagen y notas del centro
+                        let fileParejaCF = document.getElementById('CFnewParejaImg').files[0];
+                        let notasCF = document.getElementById('CFimgParejaNotas').value;
+                        
 			fdAdd.append('file',files);
 			fdAdd.append('nombres', nombre);
 			fdAdd.append('apellidos', apellido);
 			fdAdd.append('notas', notas);
 			fdAdd.append('familiar_id', familiar_id);
+
+                        fdAdd.append('file_pareja_img',fileParejaCF);
+                        fdAdd.append('notas_pareja_img',notasCF);
 
 			$http({
                             method: 'POST',
@@ -376,13 +440,76 @@
                             headers: {'Content-Type': undefined, 'Process-Data': false}
 			}).then(
 				function(response){
-                                    console.log(response);
+                                    console.log(response.data);
                                     if(response.statusText ==="OK" ){
                                         alert("Pareja añadida exitosamente");
                                         var query = new URLSearchParams();
                                         query.append("pareja_id", response.data.pareja_id);
                                         location.href = "administra-descendientes.html?" + query.toString();
                                     } else{
+                                        alert("ADDPAREJASOFT1 - Hubo un error, contacte al administrador");
+					console.log(JSON.stringify(response));
+                                    }
+                                        
+				}, function(response){
+					alert("ADDPAREJAHARD1 - Hubo un error, contacte al administrador");
+					console.log(JSON.stringify(response));
+				}
+			);
+		};
+                
+                $scope.modifyParejaCompleta = function(){
+			let fdAdd = new FormData();
+			
+                        //Se obtienen los valores del formulario izquierdo
+			let fileLF = document.getElementById('LFnewParejaImg').files[0];
+			let familiar_id_LF = $scope.LFID;
+			let nombreLF = document.getElementById('LFnewParejaNombre').value;
+			let apellidoLF = document.getElementById('LFnewParejaApellido').value;
+			let notasLF = document.getElementById('LFnewParejaNotas').value;
+                        
+                        //Se obtienen los valores del formulario derecho
+                        let fileRF = document.getElementById('RFnewParejaImg').files[0];
+			let familiar_id_RF = $scope.RFID;
+                        let nombreRF = document.getElementById('RFnewParejaNombre').value;
+			let apellidoRF = document.getElementById('RFnewParejaApellido').value;
+			let notasRF = document.getElementById('RFnewParejaNotas').value;
+                        
+                        //Se obtiene imagen y notas del centro
+                        let fileParejaCF = document.getElementById('CFnewParejaImg').files[0];
+                        let notasCF = document.getElementById('CFimgParejaNotas').value;
+			
+			fdAdd.append('file_eo',fileLF);
+			fdAdd.append('esposo_id', familiar_id_LF);
+			fdAdd.append('nombres_eo', nombreLF);
+			fdAdd.append('apellidos_eo', apellidoLF);
+			fdAdd.append('notas_eo', notasLF);
+			
+			fdAdd.append('file_ea',fileRF);
+			fdAdd.append('esposa_id', familiar_id_RF);                        
+			fdAdd.append('nombres_ea', nombreRF);
+			fdAdd.append('apellidos_ea', apellidoRF);
+			fdAdd.append('notas_ea', notasRF);
+                        
+                        fdAdd.append('file_pareja_img',fileParejaCF);
+                        fdAdd.append('notas_pareja_img',notasCF);
+                        fdAdd.append('pareja_id', pareja_id);
+                        
+			$http({
+                            method: 'POST',
+                            url: 'controller/ParejaController.php',
+                            data: fdAdd,
+                            headers: {'Content-Type': undefined, 'Process-Data': false}
+			}).then(
+				function(response){
+                                    console.log(response);
+                                    if(response.statusText === "OK" &&
+                                        confirm("Pareja actualizada exitosamente, ¿desea volver a la administración de descendientes?") === true){
+                                    
+                                        var query = new URLSearchParams();
+                                        query.append("pareja_id", pareja_id);
+                                        location.href = "administra-descendientes.html?" + query.toString();
+                                    } else if(response.statusText ==="Error" ){
                                         alert("ADDPAREJASOFT1 - Hubo un error, contacte al administrador");
 					console.log(JSON.stringify(response));
                                     }

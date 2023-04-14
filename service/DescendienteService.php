@@ -57,6 +57,25 @@ class DescendienteService {
         return $descendiente;
     }
 
+    public function getDescendienteByFamiliarId($familiar_id) {
+        $connectionManager = new ConnectionManager();
+        $descendiente = array();
+
+        $sql_descendiente_info = "SELECT *
+					FROM descendiente d
+					WHERE d.familiar_id_fk = " . $familiar_id . ";";
+        $result_descendiente_info = $connectionManager->connection->query($sql_descendiente_info);
+
+        $connectionManager->connection->close();
+
+        if ($result_descendiente_info->num_rows > 0) {
+            while ($row_descendiente = $result_descendiente_info->fetch_assoc()) {
+                $descendiente[] = $row_descendiente;
+            }
+        }
+        return $descendiente;
+    }
+
     public function addNuevoDescendiente($nombres, $apellidos, $notas, $pareja_id, $numero_hijo) {
         $response = array();
 

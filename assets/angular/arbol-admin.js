@@ -5,7 +5,9 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
 
         const params = new URL(location.href).searchParams;
         const pareja_id = params.get('pareja_id');
+        let ancestros_pareja_id;
         $scope.addNewDescendienteCheck = true;
+        $scope.viewAncestrosCheck = true;
 
         /*$("#myModal").on("hidden.bs.modal", function () {
          
@@ -27,11 +29,16 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
                 $scope.descendientes = response.data.descendientes;
                 $scope.pareja = response.data.pareja;
                 $scope.pareja_info = response.data.pareja_info;
-
+                let ancestros_id = response.data.ancestros_id;
+                let img_eo = response.data.pareja_info_eo;
+                let img_ea = response.data.pareja_info_ea;
+                console.log(response.data);
+                
                 if ($scope.pareja_info.length !== null && $scope.pareja_info.length > 0) {
                     document.getElementById("ancestro_img_principal").setAttribute("src", "assets/img/album/" + $scope.pareja_info[0].ruta_img);
 
                     document.getElementById("ancestro_nota_principal").innerText = $scope.pareja_info[0].notas;
+
                     if ($scope.pareja_info.length > 1) {
                         //Estableciendo el indice en 1 para que continue con la secuencia de imagenes
                         var index = 1;
@@ -46,7 +53,7 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
                                     "<h3>" + $scope.pareja_info[index].notas + "</h3>" +
                                     "</div>" +
                                     "</div>";
-                            if (index % 3 === 0) {
+                            if (index % 3 == 0) {
                                 indexFactor++;
                             }
                             index++;
@@ -54,20 +61,33 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
                         var indexFactor = (index - 1) / 3;
                         indexFactor = (Math.floor(indexFactor) * 450);
                         document.getElementById("product-section").style.marginBottom = indexFactor.toString() + "px";
-                    }
+                    } 
+                } else {
+                    document.getElementById("ancestro_galeria").style.display = "none";
                 }
 
                 if ($scope.pareja !== null) {
-                    var html = "<h3 style='text-align: center;'>" + $scope.pareja[0].nom_eo + " " + $scope.pareja[0].ape_eo + "<br/> y <br/>" + $scope.pareja[0].nom_ea + " " + $scope.pareja[0].ape_ea + "</h3>"
-                            + "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_eo + ":</b> " + ($scope.pareja[0].notas_eo === null ? "-" : $scope.pareja[0].notas_eo) + "</p>"
-                            + "<br/> <p> <b> Notas sobre " + $scope.pareja[0].nom_ea + ":</b> " + ($scope.pareja[0].notas_ea === null ? "-" : $scope.pareja[0].notas_ea) + "</p>"
-                            + "<br/><br/>"
-                            + "<table class='cart-table' >"
-                            + "<tr> <td align='center'><a ng-click='editPareja()' class='cart-btn'><i class='fas fa-pen' title='Editar'></i> Editar</a> </td>  </tr>"
-                            + "</table>"
-                            ;
-                    var temp = $compile(html)($scope);
-                    angular.element(document.getElementById('ancestro_nombres')).append(temp);
+
+                    if (img_eo.length !== null && img_eo.length > 0) {
+                        document.getElementById("img_eo").src = "assets/img/album/" + img_eo[0].ruta_img;
+                    }
+
+                    if (img_ea.length !== null && img_ea.length > 0) {
+                        document.getElementById("img_ea").src = "assets/img/album/" + img_ea[0].ruta_img;
+                    }
+
+                    document.getElementById("nombre_completo_eo").innerText = $scope.pareja[0].nom_eo + " " + $scope.pareja[0].ape_eo;
+                    document.getElementById("nombre_completo_ea").innerText = $scope.pareja[0].nom_ea + " " + $scope.pareja[0].ape_ea;
+
+                    document.getElementById("notas_eo").innerText = ($scope.pareja[0].notas_eo === null || $scope.pareja[0].notas_eo === "" ? "-" : $scope.pareja[0].notas_eo);
+                    document.getElementById("notas_ea").innerText = ($scope.pareja[0].notas_ea === null || $scope.pareja[0].notas_ea === "" ? "-" : $scope.pareja[0].notas_ea);
+                   
+                    if(ancestros_id !== null){
+                        $scope.viewAncestrosCheck = false;
+                        ancestros_pareja_id = ancestros_id;
+                    }
+//                    var temp = $compile(html)($scope);
+//                    angular.element(document.getElementById('ancestro_nombres')).append(temp);
                 }
             });
         });
@@ -283,4 +303,10 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
             query.append("pareja_id", pareja_id);
             location.href = "administra-pareja.html?" + query.toString();
         };
+        
+        $scope.viewAncestros = function(){
+            var query = new URLSearchParams();
+            query.append("pareja_id", ancestros_pareja_id);
+            location.href = "administra-descendientes.html?" + query.toString();
+        }
     }]);

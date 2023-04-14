@@ -50,7 +50,17 @@
 			box-shadow: none;
 			margin-bottom: 0;
 		}
-
+                
+                #ancestro_datos_table thead{
+                    font-size: 22px; 
+                    font-weight: 600; 
+                    text-align: center;
+                }
+                
+                #ancestro_datos_table td{
+                    padding: 15px;
+                }
+                
 		
 	</style>
 </head>
@@ -115,6 +125,10 @@
 	<!-- single product -->
 	<div class="single-product mt-150 mb-150" >
 		<div class="container">
+                        <div ng-hide="viewAncestrosCheck">
+                            <a ng-click='viewAncestros()' class='cart-btn'><i class='fas fa-pen' title='Editar' ></i>Ver ancestros</a>
+                        </div>
+                        <br/><br/>
 			<div class="row">
 				<div class="col-md-5">
 					<div class="single-product-img">
@@ -124,7 +138,41 @@
 				</div>
 				<div class="col-md-7">
 					<div id="ancestro_nombres" class="single-product-content">
-					
+                                        </div>
+					<div id="ancestro_datos" class="single-product-content">
+                                            <table id="ancestro_datos_table" border="0pt" style="width:100%;" >
+                                                <thead>
+                                                    <tr>
+                                                        <td class="product-image-edit">
+                                                            <img id="img_eo" src='assets/img/album/no_img.png' alt=''>
+                                                        </td>
+                                                        <td ></td>
+                                                        <td class="product-image-edit">
+                                                                <img id="img_ea" src='assets/img/album/no_img.png' alt=''>
+                                                        </td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td id="nombre_completo_eo" ></td>
+                                                        <td style="background-color: #fff3f5">y</td>
+                                                        <td id="nombre_completo_ea"></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!--<tr><td colspan="3"><br/></td></tr>-->
+                                                    <tr style="font-weight:bold; text-align: justify;">
+                                                        <td id="notas_eo" >-</td>
+                                                        <td ></td>
+                                                        <td id="notas_ea">-</td>
+                                                    </tr>
+                                                <tbody>
+                                                <tfoot>
+                                                    <tr> 
+                                                        <td colspan="3" align='center'>
+                                                            <a ng-click='editPareja()' class='cart-btn'><i class='fas fa-pen' title='Editar'></i> Editar</a> 
+                                                        </td>  
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
 					</div>
 				</div>
 			</div>			
@@ -132,12 +180,12 @@
 	</div>
 	<!-- end single product -->
 
-	<!-- products -->
-	<div id = "product-section" class="product-section mt-150 mb-150">
+	<!-- Seccion donde se mostrara todas las imagenes de la pareja de una manera ordenada en una cuadricula de 3 * N -->
+	<div id = "product-section" class="product-section mt-150 mb-150" style="display:none">
 		<div class="container">
-			<div id="ancestro_galeria" class="row product-lists">
+                        <div id="ancestro_galeria" class="row product-lists">
 				<div class="col-lg-4 col-md-6 text-center">
-					<div  class="single-product-item">
+					<div class="single-product-item">
 						<div class="product-image">
 							<img src="assets/img/album/no_img.png" alt=""/>
 						</div>
@@ -189,7 +237,7 @@
 					</tbody>					
 					<tfoot>					
 						<tr style="text-align: center; border: solid; border-top-width: 2px; border-color: #efefef;">
-							<td class="add-item" colspan="8" style="font-weight: bold; ">
+							<td class="add-item" colspan="9" style="font-weight: bold; ">
 								<a ng-click="addNewDescendiente()" data-toggle="modal" data-target="#myModal" >
 									<i class='fas fa-plus' title="Agregar Nuevo Descendiente"></i>
 								</a>
