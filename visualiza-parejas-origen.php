@@ -1,3 +1,6 @@
+<?php
+    require_once 'util/SecurityValidator.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +62,9 @@
 						<!-- menu start -->
 						<nav class="main-menu" style="text-align:left;">
 							<ul>
-								<li><a href="visualiza-parejas-origen.html">Visualiza Parejas Origen</a></li>
+								<li><a href="visualiza-parejas-origen.php">Visualiza Parejas Origen</a></li>
+								<li>&nbsp;</li>
+								<li><a href="controller/SecurityController.php">Cierra Sesión</a></li>
 								<li>&nbsp;</li>
 							</ul>
 						</nav>
@@ -209,7 +214,7 @@
                                                 "<div class='col-lg-4 col-md-6 text-center'>" +
                                                 "<div class='single-product-item'>" +
                                                 "<div class='product-image'>" +
-                                                    "<a href='administra-descendientes.html?pareja_id=" + data[index].pareja_id + "'>" +
+                                                    "<a href='administra-descendientes.php?pareja_id=" + data[index].pareja_id + "'>" +
                                                         "<img src='assets/img/album/" + (data[index].pi_img === null ? "no_img.png" : data[index].pi_img) + "' alt=''>" +
                                                         "<h3>" + data[index].nom_eo + " " + data[index].ape_eo +" <br/> & <br/> " + data[index].nom_ea + " " + data[index].ape_ea + "</h3>" +
                                                     "</a>" +

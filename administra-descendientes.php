@@ -1,3 +1,6 @@
+<?php
+    require_once 'util/SecurityValidator.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +94,9 @@
 						<!-- menu start -->
 						<nav class="main-menu" style="text-align:left;">
 							<ul>
-								<li><a href="visualiza-parejas-origen.html">Visualiza Parejas Origen</a></li>
+								<li><a href="visualiza-parejas-origen.php">Visualiza Parejas Origen</a></li>
+								<li>&nbsp;</li>
+                                                                <li><a href="controller/SecurityController.php">Cierra Sesión</a></li>
 								<li>&nbsp;</li>
 							</ul>
 						</nav>

@@ -1,6 +1,7 @@
 <?php
 
 require '../service/FamiliarService.php';
+require_once '../util/SecurityValidatorServer.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');

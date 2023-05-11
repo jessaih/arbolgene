@@ -253,7 +253,7 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
         $scope.addNewDescendiente = function () {
             $scope.resetAddModifyForm();
             let ultimoHermanoTd = document.querySelectorAll("td.product-number");
-            let ultimoHermanoText = ultimoHermanoTd[ultimoHermanoTd.length - 1].innerText;
+            let ultimoHermanoText = ultimoHermanoTd[ultimoHermanoTd.length - 1] !== undefined ? ultimoHermanoTd[ultimoHermanoTd.length - 1].innerText : 0;
             $scope.newDescendienteNumero = parseInt(ultimoHermanoText) + 1;
             document.getElementById("modal-title").innerText = "Agregar Nuevo Descendiente";
             $scope.addNewDescendienteCheck = true;
@@ -295,18 +295,18 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
         $scope.addPareja = function (familiar_id) {
             var query = new URLSearchParams();
             query.append("familiar_id", familiar_id);
-            location.href = "administra-pareja.html?" + query.toString();
+            location.href = "administra-pareja.php?" + query.toString();
         };
 
         $scope.editPareja = function () {
             var query = new URLSearchParams();
             query.append("pareja_id", pareja_id);
-            location.href = "administra-pareja.html?" + query.toString();
+            location.href = "administra-pareja.php?" + query.toString();
         };
         
         $scope.viewAncestros = function(){
             var query = new URLSearchParams();
             query.append("pareja_id", ancestros_pareja_id);
-            location.href = "administra-descendientes.html?" + query.toString();
+            location.href = "administra-descendientes.php?" + query.toString();
         }
     }]);

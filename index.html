@@ -1,168 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
-	<!-- title -->
-	<title>Árbol Genealógico</title>
+        <!-- title -->
+        <title>Árbol Genealógico</title>
 
-	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
-	<!-- google font -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-	<!-- fontawesome -->
-	<link rel="stylesheet" href="assets/css/all.min.css">
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-	<!-- owl carousel -->
-	<link rel="stylesheet" href="assets/css/owl.carousel.css">
-	<!-- magnific popup -->
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<!-- animate css -->
-	<link rel="stylesheet" href="assets/css/animate.css">
-	<!-- mean menu css -->
-	<link rel="stylesheet" href="assets/css/meanmenu.min.css">
-	<!-- main style -->
-	<link rel="stylesheet" href="assets/css/main.css">
-	<!-- responsive -->
-	<link rel="stylesheet" href="assets/css/responsive.css">
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+        <!-- google font -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+        <!-- fontawesome -->
+        <link rel="stylesheet" href="assets/css/all.min.css">
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <!-- owl carousel -->
+        <link rel="stylesheet" href="assets/css/owl.carousel.css">
+        <!-- magnific popup -->
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <!-- animate css -->
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <!-- mean menu css -->
+        <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+        <!-- main style -->
+        <link rel="stylesheet" href="assets/css/main.css">
+        <!-- responsive -->
+        <link rel="stylesheet" href="assets/css/responsive.css">
+        <style>
+		.required{
+			color: red;
+		}
+		
+	</style>
+    </head>
+    <body>
 
-</head>
-<body>
-	
-	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
+        <!--PreLoader-->
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="circle"></div>
+            </div>
         </div>
-    </div>
-    <!--PreLoader Ends-->
-	
-	<!-- header -->
-	<div class="top-header-area" id="sticker">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
-					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="assets/img/logo.png" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end header -->
-	
-	<!-- search area -->
+        <!--PreLoader Ends-->
 
-	<!-- end search area -->
+        <!-- header -->
+        <div class="top-header-area" id="sticker">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 text-center">
+                        <div class="main-menu-wrap">
+                            <!-- logo -->
+                            <div class="site-logo">
+                                <a href="index.html">
+                                    <img src="assets/img/logo.png" alt="">
+                                </a>
+                            </div>
+                            <!-- logo -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end header -->
 
-	<!-- hero area -->
-	<div class="hero-area hero-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-9 offset-lg-2 text-center">
-					<div class="hero-text">
-						<div class="hero-text-tablecell">
-							<p class="subtitle">Árbol </p>
-							<h1>Genealógico</h1>
-							<div class="hero-btns">
-								<a href="visualiza-parejas-origen.html" class="boxed-btn">Entrar</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end hero area -->
+        <!-- search area -->
 
-	<!-- features list section -->
+        <!-- end search area -->
 
-	<!-- end product section -->
+        <!-- hero area -->
+        <div class="hero-area hero-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 offset-lg-2 text-center">
+                        <div class="hero-text">
+                            <div class="hero-text-tablecell">
+                                <p class="subtitle">Árbol </p>
+                                <h1>Genealógico</h1>
+                                <div class="hero-btns">
+                                    <a class="boxed-btn" ng-click="addNewDescendiente()" data-toggle="modal" data-target="#myModal" >
+                                        Entrar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end hero area -->
 
-	<!-- cart banner section -->
+        <div class="modal fade" id="myModal" role="dialog" style="display: none;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" >
+                        <h4 class="modal-title" id = "modal-title">Inicia Sesión</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="logon" id="logon" action="controller/SecurityController.php" method = "POST">
+                            <table cellpadding="12">
+                                <tr>
+                                    <td class = "formlabel"><label for="user">Usuario</label> <span class="required"> *</span></td>
+                                    <td> 
+                                        <input id="user" name="user" ng-model="user" type="text" required /> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class = "formlabel"><label for="passwd">Contraseña</label> <span class="required"> *</span></td>
+                                    <td> 
+                                        <input id="passwd" name="passwd" ng-model="passwd" type="text" required /> 
+                                    </td>
+                                </tr>																
+                                <tr>
+                                    <td > </td>
+                                    <td class = "formlabel"> 
+                                        <button type="submit" ng-disabled="logon.$invalid">Crear</button> 
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"/> 
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="modal-dismiss" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- end cart banner section -->
+        <!-- footer -->
+        <div class="footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-box about-widget">
+                            <h2 class="widget-title">Acerca</h2>
+                            <p>
+                                Grupo de todos los herederos de los 6 hermanos González González nacidos en Tzurumuato hoy Pastor Ortiz, Michoacán.
+                                Nuestros ancestros son:
+                                <br/><br/>
+                                Teodomira, Eulalia, Josefa, Antonio, Francisca y Maria nacidos entre 1875 y 1890, todos hijos de Francisco González y Francisca González</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-box get-in-touch">
+                            <h2 class="widget-title">Contactáme</h2>
+                            <ul>
+                                <li></li>
+                                <li>Email: jessaigh@gmail.com</li>
+                                <li>Whatsapp</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end footer -->
 
-	<!-- testimonail-section -->
+        <!-- copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end copyright -->
 
-	<!-- end latest news -->
-
-	<!-- logo carousel -->
-
-	<!-- end logo carousel -->
-
-	<!-- footer -->
-	<div class="footer-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box about-widget">
-						<h2 class="widget-title">Acerca</h2>
-						<p>
-						Grupo de todos los herederos de los 6 hermanos González González nacidos en Tzurumuato hoy Pastor Ortiz, Michoacán.
-						Nuestros ancestros son:
-						<br/><br/>
-						Teodomira, Eulalia, Josefa, Antonio, Francisca y Maria nacidos entre 1875 y 1890, todos hijos de Francisco González y Francisca González</p>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box get-in-touch">
-						<h2 class="widget-title">Contactáme</h2>
-						<ul>
-							<li></li>
-							<li>Email: jessaigh@gmail.com</li>
-							<li>Whatsapp</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end footer -->
-	
-	<!-- copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<p>Copyrights &copy; 2023 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end copyright -->
-	
-	<!-- jquery -->
-	<script src="assets/js/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="assets/js/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="assets/js/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="assets/js/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="assets/js/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="assets/js/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="assets/js/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="assets/js/sticker.js"></script>
-	<!-- main js -->
-	<script src="assets/js/main.js"></script>
-
-</body>
+        <!-- jquery -->
+        <script src="assets/js/jquery-1.11.3.min.js"></script>
+        <!-- bootstrap -->
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <!-- count down -->
+        <script src="assets/js/jquery.countdown.js"></script>
+        <!-- isotope -->
+        <script src="assets/js/jquery.isotope-3.0.6.min.js"></script>
+        <!-- waypoints -->
+        <script src="assets/js/waypoints.js"></script>
+        <!-- owl carousel -->
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <!-- magnific popup -->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <!-- mean menu -->
+        <script src="assets/js/jquery.meanmenu.min.js"></script>
+        <!-- sticker js -->
+        <script src="assets/js/sticker.js"></script>
+        <!-- main js -->
+        <script src="assets/js/main.js"></script>
+        <script >
+            const params = new URL(location.href).searchParams;
+            const unauth = params.get('unauthorized');
+            if (unauth === 'true') {
+                alert("Usuario no valido, inicie sesión por favor");
+            }
+        </script>
+    </body>
 </html>

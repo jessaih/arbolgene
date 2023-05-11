@@ -1,6 +1,7 @@
 <?php
 
 require '../service/ParejaService.php';
+require_once '../util/SecurityValidatorServer.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
@@ -11,8 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['familiar_id'])) {
     $pareja_id_array = $parejaService->findParejaByFamiliaId($familiar_id);
     $pareja_id = $pareja_id_array[0]["pareja_id"];
 
-    header("Location: ../administra-descendientes.html?pareja_id=" . $pareja_id . "&familiar_id=" . $familiar_id);
-    exit;
+    header("Location: ../administra-descendientes.php?pareja_id=" . $pareja_id . "&familiar_id=" . $familiar_id);
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pareja_id'])) {
     $pareja_id = $_GET['pareja_id'];
     //error_log(print_r($_POST, TRUE));

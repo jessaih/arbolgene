@@ -1,3 +1,6 @@
+<?php
+    require_once 'util/SecurityValidator.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,8 +77,10 @@
 						<!-- menu start -->
 						<nav class="main-menu" style="text-align:left;">
 							<ul>
-								<li><a href="visualiza-parejas-origen.html">Visualiza Parejas Origen</a></li>
+								<li><a href="visualiza-parejas-origen.php">Visualiza Parejas Origen</a></li>
 								<li>&nbsp;</li>
+								<li><a href="controller/SecurityController.php">Cierra Sesión</a></li>
+								<li>&nbsp;</li>                                                                
 							</ul>
 						</nav>
 						<!-- menu end -->
@@ -445,7 +450,7 @@
                                         alert("Pareja añadida exitosamente");
                                         var query = new URLSearchParams();
                                         query.append("pareja_id", response.data.pareja_id);
-                                        location.href = "administra-descendientes.html?" + query.toString();
+                                        location.href = "administra-descendientes.php?" + query.toString();
                                     } else{
                                         alert("ADDPAREJASOFT1 - Hubo un error, contacte al administrador");
 					console.log(JSON.stringify(response));
@@ -508,7 +513,7 @@
                                     
                                         var query = new URLSearchParams();
                                         query.append("pareja_id", pareja_id);
-                                        location.href = "administra-descendientes.html?" + query.toString();
+                                        location.href = "administra-descendientes.php?" + query.toString();
                                     } else if(response.statusText ==="Error" ){
                                         alert("ADDPAREJASOFT1 - Hubo un error, contacte al administrador");
 					console.log(JSON.stringify(response));

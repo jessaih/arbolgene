@@ -19,17 +19,17 @@ class ArbolGenealogicoService {
         $pareja_info_ea = null;
         $pareja_info_eo = null;
         $ancestros_id = null;
-        
+
         if (count($pareja) > 0 && $pareja[0]["eo_id"] != null && $pareja[0]["ea_id"] != null) {
             $pareja_info_eo = $familiarService->getFamiliarInfo($pareja[0]["eo_id"]);
             $pareja_info_ea = $familiarService->getFamiliarInfo($pareja[0]["ea_id"]);
         }
-        
-        /**Funcion que recibe el esposo_id para obtener sus ancestros, esto siempre funcionará
-        * ya que el sistema esta diseñado a que el esposo_id o eo_id siempre contendrá
-        * el Id del familiar directo y no de la pareja que viene de otra familia externa
-        */
-        if($pareja[0]["nivel"] > 1){
+
+        /*         * Funcion que recibe el esposo_id para obtener sus ancestros, esto siempre funcionará
+         * ya que el sistema esta diseñado a que el esposo_id o eo_id siempre contendrá
+         * el Id del familiar directo y no de la pareja que viene de otra familia externa
+         */
+        if ($pareja[0]["nivel"] > 1) {
             $descendiente_familiar_info = $descendienteService->getDescendienteByFamiliarId($pareja[0]["eo_id"]);
             $ancestros_id = $descendiente_familiar_info[0]["pareja_id_fk"];
         }
@@ -72,6 +72,26 @@ class ArbolGenealogicoService {
         }
 
         return json_encode($response);
+    }
+
+    public function iniciaSesion($usuario_enviado, $passwd_enviado) {
+        $usuario = '$2y$10$3BdNKZ8UixnaUqU0wGZY1u0LYOXfQ8pVTpGc8nlUYuquWavwDuwie';
+        $passwd = '$2y$10$DloaBlmuQnjIird.ybcF1O.YbmUqoUhei1A3hpgDYbOV2rFIp5EqS';
+        if (password_verify($usuario_enviado, $usuario) && password_verify($passwd_enviado, $passwd)) {
+            echo "arf";
+            session_start();
+            session_regenerate_id();
+            $_SESSION['loggedin'] = TRUE;
+            $_SESSION['name'] = "Pariente";
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function cierraSesion() {
+        session_start();
+        session_destroy();
     }
 
 }
