@@ -27,12 +27,14 @@ app.controller('MyCtrl', ['$scope', '$http', '$compile', function ($scope, $http
                 }
             }).then(function (response) {
                 $scope.descendientes = response.data.descendientes;
+                
                 $scope.pareja = response.data.pareja;
                 $scope.pareja_info = response.data.pareja_info;
                 let ancestros_id = response.data.ancestros_id;
                 let img_eo = response.data.pareja_info_eo;
                 let img_ea = response.data.pareja_info_ea;
-                console.log(response.data);
+                
+                console.log($scope.descendientes);
                 
                 if ($scope.pareja_info.length !== null && $scope.pareja_info.length > 0) {
                     document.getElementById("ancestro_img_principal").setAttribute("src", "assets/img/album/" + $scope.pareja_info[0].ruta_img);

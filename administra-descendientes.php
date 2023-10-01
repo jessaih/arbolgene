@@ -231,7 +231,7 @@
 							<td class="product-name"><b> {{descendiente.nombres}} </b></td> 
 							<td class="product-lastname"><b> {{descendiente.apellidos}} </b></td> 
 							<td class="product-number"> {{descendiente.numero_hermano}} </td> 
-							<td class="product-notas"> {{descendiente.notas}} </td> 
+                                                        <td class="product-notas"> <div style="white-space: pre-wrap">{{descendiente.notas}}</div> </td> 
 							<td class="product-edit"><a ng-click="modifyNewDescendiente($index, descendiente.descendiente_id)"  data-toggle="modal" data-target="#myModal"><i class='fas fa-pen' title="Editar"></i></a></td> 
 							<td class="product-remove"><a ng-click="delete(descendiente.descendiente_id, descendiente.nombres, descendiente.apellidos)"><i class='fas fa-trash' title="Eliminar"></i></a></td> 
 							<td class="product-view">

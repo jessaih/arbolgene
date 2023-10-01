@@ -1,7 +1,7 @@
 <?php
 
 require '../service/ArbolGenealogicoService.php';
-require_once '../util/SecurityValidatorServer.php';
+require_once '../util/SecurityValidator.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Content-type: application/json');
